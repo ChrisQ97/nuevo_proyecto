@@ -6,6 +6,7 @@
 package inventario2;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,14 +21,28 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  * @author sys515
  */
 public class Ventas extends javax.swing.JFrame {
-    Conexion con = new Conexion();
-    Connection Consulta = con.conexion();
+   
+    
     /**
      * Creates new form Ventas
      */
     
+    //variables Q97
+    DefaultTableModel modelo; //para la tabla
+    Conexion con = new Conexion();
+    Connection cn = con.conexion();
+    Connection tr = con.conexion();
+    Connection Consulta = con.conexion();
+    
+    
     public Ventas() {
         initComponents();
+        //tabla asignar el modelo Q97
+        modelo = (DefaultTableModel)Factura.getModel();
+        System.out.println("");
+       
+        
+        
         DefaultTableModel modelo=(DefaultTableModel) Factura.getModel();
         Cantidad.setText("");
         AutoCompleteDecorator.decorate(Producto);
@@ -65,6 +80,7 @@ public class Ventas extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         NombreM = new javax.swing.JLabel();
         ApellidoM = new javax.swing.JLabel();
+        botonagcliente = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Factura = new javax.swing.JTable();
         panelfactura = new javax.swing.JPanel();
@@ -113,6 +129,8 @@ public class Ventas extends javax.swing.JFrame {
 
         ApellidoM.setText("Apellido");
 
+        botonagcliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/clientead11.png"))); // NOI18N
+
         javax.swing.GroupLayout panelclienteLayout = new javax.swing.GroupLayout(panelcliente);
         panelcliente.setLayout(panelclienteLayout);
         panelclienteLayout.setHorizontalGroup(
@@ -120,29 +138,37 @@ public class Ventas extends javax.swing.JFrame {
             .addGroup(panelclienteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(NombreM)
+                    .addGroup(panelclienteLayout.createSequentialGroup()
+                        .addGroup(panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(NombreM)
+                            .addComponent(ApellidoM))
+                        .addContainerGap(281, Short.MAX_VALUE))
                     .addGroup(panelclienteLayout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(59, 59, 59)
                         .addGroup(panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Nit, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)))
-                    .addComponent(ApellidoM))
-                .addContainerGap(113, Short.MAX_VALUE))
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonagcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34))))
         );
         panelclienteLayout.setVerticalGroup(
             panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelclienteLayout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Nit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelclienteLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Nit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)))
+                    .addComponent(botonagcliente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(NombreM)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ApellidoM)
-                .addGap(0, 15, Short.MAX_VALUE))
+                .addGap(0, 21, Short.MAX_VALUE))
         );
 
         jPanel1.add(panelcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 350, 120));
@@ -341,14 +367,29 @@ public class Ventas extends javax.swing.JFrame {
         jPanel1.add(addfila, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 140, 30, 30));
 
         elimfila.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menosa8.png"))); // NOI18N
+        elimfila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                elimfilaActionPerformed(evt);
+            }
+        });
         jPanel1.add(elimfila, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 190, 30, 30));
 
         breturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/regresara7.png"))); // NOI18N
+        breturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                breturnActionPerformed(evt);
+            }
+        });
         jPanel1.add(breturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 360, 40, -1));
 
         panelventab.setBackground(new java.awt.Color(189, 189, 189));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cajara23.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelventabLayout = new javax.swing.GroupLayout(panelventab);
         panelventab.setLayout(panelventabLayout);
@@ -459,10 +500,61 @@ public class Ventas extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_AgregarActionPerformed
-
+    //Q97
     private void addfilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addfilaActionPerformed
         // TODO add your handling code here:
+        modelo.addRow(new Object[]{"","","",""});
     }//GEN-LAST:event_addfilaActionPerformed
+
+    private void elimfilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elimfilaActionPerformed
+        // TODO add your handling code here:
+        modelo.removeRow(modelo.getRowCount()-1);
+    }//GEN-LAST:event_elimfilaActionPerformed
+
+    private void ingresarprod(String ca_, String fc_, String st_, String iva_, String lv_){
+        
+        try {
+            PreparedStatement ingrprod = cn.prepareStatement("INSERT INTO DetalleVenta(Cantidad,FacturaVenta_id,SubTotal,IvaVenta,LoteVenta_id) VALUES(?,?,?,?,?)");
+            ingrprod.setString(1, ca_);
+            ingrprod.setString(2, fc_);
+            ingrprod.setString(3, st_);
+            ingrprod.setString(4, iva_);
+            ingrprod.setString(5, lv_);
+            ingrprod.executeUpdate();
+            ingrprod.close();
+            
+            JOptionPane.showMessageDialog(null, "Nuevo Proveedor Agregado");
+
+        }catch(SQLException ex) {
+            Logger.getLogger(IngresarProve.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
+    private void breturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breturnActionPerformed
+        // TODO add your handling code here:
+        
+        Menu men=new Menu();
+        men.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_breturnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        //vamos a obtener datos de la tabla Q97
+        String lote;
+        //convertir los datos a string
+        
+        for (int i = 0; i < Factura.getRowCount(); i++) {
+            ingresarprod(Factura.getValueAt(i, 0), Factura.getValueAt(i, 1), Factura.getValueAt(i, 2), Factura.getValueAt(i, 3), lote);
+            
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -517,6 +609,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> Producto;
     private javax.swing.JTextField Serie;
     private javax.swing.JButton addfila;
+    private javax.swing.JButton botonagcliente;
     private javax.swing.JButton breturn;
     private javax.swing.JButton elimfila;
     private javax.swing.JButton jButton1;

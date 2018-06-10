@@ -102,6 +102,11 @@ public class IngresarProve extends javax.swing.JFrame {
                 jToggleButton1MouseClicked(evt);
             }
         });
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, 98, 38));
 
         jLabel5.setText("Telefono");
@@ -218,6 +223,10 @@ public class IngresarProve extends javax.swing.JFrame {
             Telefono.transferFocus();
         }
     }//GEN-LAST:event_TelefonoKeyTyped
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments

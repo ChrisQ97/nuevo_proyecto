@@ -103,6 +103,11 @@ public class Menu extends javax.swing.JFrame {
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, -1, -1));
 
         botonventa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ventasa7.png"))); // NOI18N
+        botonventa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonventaActionPerformed(evt);
+            }
+        });
         jPanel2.add(botonventa, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 70, 70));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -165,6 +170,13 @@ System.exit(0);
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
      cerrar();        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosing
+
+    private void botonventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonventaActionPerformed
+        // TODO add your handling code here:
+        Ventas trd = new Ventas();
+        trd.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_botonventaActionPerformed
 
     /**
      * @param args the command line arguments
