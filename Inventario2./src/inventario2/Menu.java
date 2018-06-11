@@ -130,9 +130,19 @@ public class Menu extends javax.swing.JFrame {
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, -1, -1));
 
         botonclientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cli30.png"))); // NOI18N
+        botonclientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonclientesActionPerformed(evt);
+            }
+        });
         jPanel2.add(botonclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 80, 80));
 
         botonprov.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/prov40.png"))); // NOI18N
+        botonprov.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonprovActionPerformed(evt);
+            }
+        });
         jPanel2.add(botonprov, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 80, -1));
 
         botonfinanzas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fin31.png"))); // NOI18N
@@ -168,15 +178,26 @@ System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-     cerrar();        // TODO add your handling code here:
+    cerrar();    // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosing
 
     private void botonventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonventaActionPerformed
-        // TODO add your handling code here:
-        Ventas trd = new Ventas();
-        trd.setVisible(true);
-        dispose();
+      Ventas x=new Ventas();
+      x.setVisible(true);
+      dispose();// TODO add your handling code here:
     }//GEN-LAST:event_botonventaActionPerformed
+
+    private void botonclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonclientesActionPerformed
+        // TODO add your handling code here:
+        verclientes vr = new verclientes();
+        vr.setVisible(true);
+    }//GEN-LAST:event_botonclientesActionPerformed
+
+    private void botonprovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonprovActionPerformed
+        // TODO add your handling code here:
+        verprove prov = new verprove();
+        prov.setVisible(true);
+    }//GEN-LAST:event_botonprovActionPerformed
 
     /**
      * @param args the command line arguments

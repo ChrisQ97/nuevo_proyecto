@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package inventario2;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -21,11 +22,12 @@ import javax.swing.JOptionPane;
  * @author chr97lubuntu
  */
 public class Clientes extends javax.swing.JFrame {
+
     //Q97
     Conexion con = new Conexion();
     Connection cn = con.conexion();
     Connection tr = con.conexion();
-    
+
     /**
      * Creates new form Clientes
      */
@@ -163,51 +165,48 @@ public class Clientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     //Q97
-  
-    
+
+
     private void botonagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonagregarActionPerformed
         // TODO add your handling code here:
-        
-        if(Nombre.getText().equals("")||Apellido.getText().equals("")||Nit.getText().equals("")
-                ||Telefono.getText().equals("")||Direccion.getText().equals("")||Correo.getText().equals(""))
-        {
-           JOptionPane.showMessageDialog(null, "Revise que todos los campos esten llenos");
 
-        }
-        else {
-        try {
-            Statement st = cn.createStatement();
-            ResultSet rd = st.executeQuery("SELECT Nit FROM Cliente WHERE Nit ='" + Nit.getText() + "'");
-            int CR = 0;
-            while (rd.next()) {
-                CR++;
+        if (Nombre.getText().equals("") || Apellido.getText().equals("") || Nit.getText().equals("")
+                || Telefono.getText().equals("") || Direccion.getText().equals("") || Correo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Revise que todos los campos esten llenos");
+
+        } else {
+            try {
+                Statement st = cn.createStatement();
+                ResultSet rd = st.executeQuery("SELECT Nit FROM Cliente WHERE Nit ='" + Nit.getText() + "'");
+                int CR = 0;
+                while (rd.next()) {
+                    CR++;
+                }
+
+                if (CR == 0) {
+
+                    insertarcliente();
+                    Nombre.setText("");
+                    Nit.setText("");
+                    Direccion.setText("");
+                    Apellido.setText("");
+                    Telefono.setText("");
+                    Correo.setText("");
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usted ya tiene Registrado el Nit " + Nit.getText());
+                    Nombre.setText("");
+                    Nit.setText("");
+                    Direccion.setText("");
+                    Apellido.setText("");
+                    Telefono.setText("");
+                    Correo.setText("");
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(IngresarProve.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            if (CR == 0) {
-
-                insertarcliente();
-                Nombre.setText("");
-                Nit.setText("");
-                Direccion.setText("");
-                Apellido.setText("");
-                Telefono.setText("");
-                Correo.setText("");
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Usted ya tiene Registrado el Nit " + Nit.getText());
-                Nombre.setText("");
-                Nit.setText("");
-                Direccion.setText("");
-                Apellido.setText("");
-                Telefono.setText("");
-                Correo.setText("");
-
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(IngresarProve.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        dispose();
+            dispose();
         }
 
     }//GEN-LAST:event_botonagregarActionPerformed
@@ -216,8 +215,8 @@ public class Clientes extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     //Q97
-    private void insertarcliente(){
-         try {
+    private void insertarcliente() {
+        try {
             PreparedStatement CrearCli = cn.prepareStatement("INSERT INTO Cliente(Nombre,Apellido,Nit,Direccion,Numero,Correo) VALUES(?,?,?,?,?,?)");
             CrearCli.setString(1, Nombre.getText());
             CrearCli.setString(2, Apellido.getText());
@@ -232,16 +231,9 @@ public class Clientes extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(IngresarProve.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        
+
     }
-    
-    
-    
-    
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -265,6 +257,7 @@ public class Clientes extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -273,9 +266,10 @@ public class Clientes extends javax.swing.JFrame {
             }
         });
     }
+
     //Q97
-    private void TelefonoKeyTyped(java.awt.event.KeyEvent evt) {                                  
-         int k = (int) evt.getKeyChar();
+    private void TelefonoKeyTyped(java.awt.event.KeyEvent evt) {
+        int k = (int) evt.getKeyChar();
         if (k >= 97 && k <= 122 || k >= 65 && k <= 90) {
             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
             JOptionPane.showMessageDialog(null, "No puede ingresar letras!!!", "Ventana Error Datos", JOptionPane.ERROR_MESSAGE);
@@ -284,7 +278,7 @@ public class Clientes extends javax.swing.JFrame {
             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
             JOptionPane.showMessageDialog(null, "No puede ingresar letras!!!", "Ventana Error Datos", JOptionPane.ERROR_MESSAGE);
         }
-        if (k >= 33 && k <=47 ) {
+        if (k >= 33 && k <= 47) {
             evt.setKeyChar((char) KeyEvent.VK_CLEAR);
             JOptionPane.showMessageDialog(null, "No puede ingresar Simbolos!!!", "Ventana Error Datos", JOptionPane.ERROR_MESSAGE);
         }

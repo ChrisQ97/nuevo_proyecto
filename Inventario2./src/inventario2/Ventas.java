@@ -5,6 +5,7 @@
  */
 package inventario2;
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,31 +22,27 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
  * @author sys515
  */
 public class Ventas extends javax.swing.JFrame {
-   
-    
+    Conexion con = new Conexion();
+    Connection Consulta = con.conexion();
+    Connection Insertar = con.conexion();
+    DefaultTableModel modelo; //para la tabla
+    private String nitglobal=null;
+
     /**
      * Creates new form Ventas
      */
     
-    //variables Q97
-    DefaultTableModel modelo; //para la tabla
-    Conexion con = new Conexion();
-    Connection cn = con.conexion();
-    Connection tr = con.conexion();
-    Connection Consulta = con.conexion();
-    
-    
     public Ventas() {
         initComponents();
-        //tabla asignar el modelo Q97
+                this.setDefaultCloseOperation(this.HIDE_ON_CLOSE); 
+
         modelo = (DefaultTableModel)Factura.getModel();
-        System.out.println("");
-       
-        
-        
-        DefaultTableModel modelo=(DefaultTableModel) Factura.getModel();
         Cantidad.setText("");
+        Serie.setText("");
+        Numero.setText("");
+        
         AutoCompleteDecorator.decorate(Producto);
+        modelo.setRowCount(0);
         try {
 
             Statement sx = Consulta.createStatement();
@@ -57,9 +54,71 @@ public class Ventas extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Compras.class.getName()).log(Level.SEVERE, null, ex);
         }
+         try {
+
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT Nit FROM Cliente");
+            while (Ca.next()) {
+
+                Nit.addItem(Ca.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Compras.class.getName()).log(Level.SEVERE, null, ex);
+        }
        
 
     }
+    private int CuantosLotes(String Codigo)
+    {
+        int cantidad=0;
+        int NoLotes=0;
+        cantidad=Integer.parseInt(Cantidad.getText());
+
+        try {
+           
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT Cantidad FROM Lote  where Producto_id='"+Codigo+"' ORDER BY Fecha ASC");
+            while(Ca.next())
+            {
+                if(cantidad>0)
+                {  
+                    cantidad=cantidad-Integer.parseInt(Ca.getString(1));
+                    NoLotes++;
+
+                }
+            }
+            return NoLotes;
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    private int CuantosLotes2(String id)
+    {
+        int cantidad=0;
+        int NoLotes=0;
+        cantidad=Integer.parseInt(Cantidad.getText());
+
+        try {
+           
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT Cantidad FROM Lote  where Producto_id='"+id+"' ORDER BY Fecha ASC");
+            while(Ca.next())
+            {
+                if(cantidad>0)
+                {  
+                    cantidad=cantidad-Integer.parseInt(Ca.getString(1));
+                    NoLotes++;
+
+                }
+            }
+            return NoLotes;
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,7 +139,8 @@ public class Ventas extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         NombreM = new javax.swing.JLabel();
         ApellidoM = new javax.swing.JLabel();
-        botonagcliente = new javax.swing.JButton();
+        N = new javax.swing.JLabel();
+        NY = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Factura = new javax.swing.JTable();
         panelfactura = new javax.swing.JPanel();
@@ -110,8 +170,15 @@ public class Ventas extends javax.swing.JFrame {
         breturn = new javax.swing.JButton();
         panelventab = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        Totales = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(189, 189, 189));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -123,13 +190,21 @@ public class Ventas extends javax.swing.JFrame {
 
         jLabel2.setText("Cliente");
 
+        Nit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NitActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("Nit");
 
         NombreM.setText("Nombre");
 
         ApellidoM.setText("Apellido");
 
-        botonagcliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/clientead11.png"))); // NOI18N
+        N.setText("jLabel14");
+
+        NY.setText("jLabel15");
 
         javax.swing.GroupLayout panelclienteLayout = new javax.swing.GroupLayout(panelcliente);
         panelcliente.setLayout(panelclienteLayout);
@@ -138,40 +213,38 @@ public class Ventas extends javax.swing.JFrame {
             .addGroup(panelclienteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(NombreM))
+                .addGap(22, 22, 22)
+                .addGroup(panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelclienteLayout.createSequentialGroup()
-                        .addGroup(panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(NombreM)
-                            .addComponent(ApellidoM))
-                        .addContainerGap(281, Short.MAX_VALUE))
-                    .addGroup(panelclienteLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(59, 59, 59)
-                        .addGroup(panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Nit, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botonagcliente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))))
+                        .addComponent(N)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ApellidoM)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(NY))
+                    .addComponent(Nit, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         panelclienteLayout.setVerticalGroup(
             panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelclienteLayout.createSequentialGroup()
-                .addGroup(panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelclienteLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Nit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)))
-                    .addComponent(botonagcliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(NombreM)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ApellidoM)
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addGroup(panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Nit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelclienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NombreM)
+                    .addComponent(N)
+                    .addComponent(ApellidoM)
+                    .addComponent(NY))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        jPanel1.add(panelcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 350, 120));
+        jPanel1.add(panelcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 350, 140));
 
         Factura.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -186,7 +259,7 @@ public class Ventas extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Factura);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, 560, 270));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 560, 270));
 
         panelfactura.setBackground(new java.awt.Color(189, 189, 189));
 
@@ -265,6 +338,12 @@ public class Ventas extends javax.swing.JFrame {
         Existencia.setText("jLabel13");
 
         jLabel11.setText("Cantidad");
+
+        Cantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                CantidadKeyTyped(evt);
+            }
+        });
 
         MostrarLote.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lotea17.png"))); // NOI18N
         MostrarLote.setToolTipText("");
@@ -367,19 +446,9 @@ public class Ventas extends javax.swing.JFrame {
         jPanel1.add(addfila, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 140, 30, 30));
 
         elimfila.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/menosa8.png"))); // NOI18N
-        elimfila.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                elimfilaActionPerformed(evt);
-            }
-        });
         jPanel1.add(elimfila, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 190, 30, 30));
 
         breturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/regresara7.png"))); // NOI18N
-        breturn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                breturnActionPerformed(evt);
-            }
-        });
         jPanel1.add(breturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 360, 40, -1));
 
         panelventab.setBackground(new java.awt.Color(189, 189, 189));
@@ -409,15 +478,25 @@ public class Ventas extends javax.swing.JFrame {
 
         jPanel1.add(panelventab, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, -1, -1));
 
+        jLabel14.setText("Total");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 440, -1, -1));
+
+        Totales.setText("0000");
+        jPanel1.add(Totales, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 440, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 971, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -439,12 +518,43 @@ public class Ventas extends javax.swing.JFrame {
             Logger.getLogger(Compras.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     private void llenarCl(String Codigo)
+    {   
+        
+        try {
+
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT Nombre,Apellido FROM Cliente Where Nit='"+Codigo+"'");
+            while (Ca.next()) {
+
+                N.setText(Ca.getString(1));
+                NY.setText(Ca.getString(2));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Compras.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     private String id(String Codigo)
     {
         try {
 
             Statement sx = Consulta.createStatement();
             ResultSet Ca = sx.executeQuery("SELECT id FROM Producto Where Codigo='"+Codigo+"'");
+            while (Ca.next()) {
+
+                return Ca.getString(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Compras.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    private String id2(String Nombre,String Marca)
+    {
+        try {
+
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT id FROM Producto Where Nombre='"+Nombre+"'&& Marca='"+Marca+"'");
             while (Ca.next()) {
 
                 return Ca.getString(1);
@@ -480,81 +590,329 @@ public class Ventas extends javax.swing.JFrame {
         }
         return 0;
     }
+    private String Facturacion(int x,String Codigo)
+    {   double cantidad=0;
+        cantidad=Double.parseDouble(Cantidad.getText());
+        double PrecioTotal=0;
+         try {
+           
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT Cantidad,PrecioUnitario FROM Lote  where Producto_id='"+Codigo+"' ORDER BY Fecha ASC Limit "+x+"");
+            while(Ca.next())
+            {   
+                if(x==1)
+                {
+                    PrecioTotal=PrecioTotal+Double.parseDouble(Cantidad.getText())*Double.parseDouble(Ca.getString(2));
+                }
+                else
+                {
+                  if(cantidad<Double.parseDouble(Ca.getString(1)))
+                  {
+                     
+                     
+                      PrecioTotal=PrecioTotal+cantidad*Double.parseDouble(Ca.getString(2));
+
+                  }
+                  if(cantidad==Double.parseDouble(Ca.getString(1)))
+                  {
+                     
+                    PrecioTotal=PrecioTotal+Double.parseDouble(Ca.getString(1))*Double.parseDouble(Ca.getString(2));
+                  }
+                  if(cantidad>Double.parseDouble(Ca.getString(1)))
+                  {
+                     
+                     
+                      cantidad=cantidad-Double.parseDouble(Ca.getString(1));
+                      PrecioTotal=PrecioTotal+(Double.parseDouble(Ca.getString(1))*Double.parseDouble(Ca.getString(2)));
+
+                  }
+                  
+                }
+            }
+          return String.valueOf(PrecioTotal);
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "Precio Total "+PrecioTotal);
+        return null;
+
+    }
+    
+    
+    private int getidPro(String Nom, String Marca) {
+        int id3 = 0;
+        try {
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT id FROM Producto WHERE Nombre='" + Nom + "'&& Marca='" + Marca + "'");
+            while (Ca.next()) {
+                id3 = Integer.parseInt(Ca.getString(1));
+            }
+            return id3;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Compras.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
     private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
+      if(Serie.getText().equals("")||Numero.getText().equals(""))
+      {
+        JOptionPane.showMessageDialog(null, "Campo(s) Vacio(s)");
+
+      }
+      else{
+        String x[]=new String[5];
+        String idFac=crearFactura(Serie.getText(),Numero.getText());
+        for (int i = 0; i < Factura.getRowCount(); i++) {
+        for (int j = 0; j < Factura.getColumnCount(); j++) {
+            x[j]=Factura.getValueAt(i,j).toString().trim();
+           
+        }
+        crearLotesNuevos(idFac,x,id2(x[1],x[2])); 
+       
+        Menu xx=new Menu();
+        
+        dispose();
+        xx.setVisible(true);
+      
+      JOptionPane.showMessageDialog(null, "Factura Creada");
+
+      
+        
+    }
+      }
+      
+    }//GEN-LAST:event_AgregarActionPerformed
+    
+    private void crearLotesNuevos(String idF,String ve[],String idP)
+     {
+         
+        double cantidad=Double.parseDouble(ve[0]); 
+        try {
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT NoLote,Cantidad,PrecioUnitario,PrecioTotal,Descripcion FROM Lote  where Producto_id='"+
+                    idP+"' ORDER BY Fecha ASC Limit "+
+                    CuantosLotes2(idP)+"");
+            while(Ca.next())
+            {   
+                if(CuantosLotes2(idP)==1)
+                {   
+                    double aux=cantidad-Double.parseDouble(Ca.getString(2));
+                    cantidad=cantidad-aux;
+                    PreparedStatement CrearLot = Insertar.prepareStatement
+                    ("INSERT INTO LoteVenta(NoLote,Cantidad,PrecioUnitario,PrecioTotal,Descripcion,Producto_id,FacturaVenta_id,Fecha) "
+                            + "VALUES(?,?,?,?,?,?,?,now())");
+                    CrearLot.setString(1,Ca.getString(1));
+                    CrearLot.setString(2,ve[0]);
+                    CrearLot.setString(3,Ca.getString(3));
+                    double precioTo=0;
+                    precioTo=(Double.parseDouble(ve[0]))*(Double.parseDouble(Ca.getString(3)));
+                    CrearLot.setString(4,String.valueOf(precioTo));
+                    CrearLot.setString(5,Ca.getString(5));
+                    CrearLot.setString(6,idP);
+                    CrearLot.setString(7,idF);
+                    CrearLot.executeUpdate();
+                    CrearLot.close();
+                    if(cantidad==0)
+                    {
+                        PreparedStatement Actualizar = Insertar.prepareStatement("UPDATE Lote set Cantidad=0, Disponible=false where Disponible=true && Producto_id="+idP+""
+                            + "&& NoLote="+Ca.getString(1)+"");
+                   Actualizar.executeUpdate();
+                   Actualizar.close();
+                    }
+                    else
+                    {
+                       
+                    PreparedStatement Actualizar = Insertar.prepareStatement("UPDATE Lote set Cantidad=Cantidad-'"+ve[0]+"'where Disponible=true && Producto_id="+idP+""
+                            + "&& NoLote="+Ca.getString(1)+"");
+                   Actualizar.executeUpdate();
+                   Actualizar.close();
+                    }
+                    
+                        
+                }
+                else
+                {    
+                    if(cantidad<Double.parseDouble(Ca.getString(2)))
+                  {
+                     PreparedStatement CrearLot = Insertar.prepareStatement
+                    ("INSERT INTO LoteVenta(NoLote,Cantidad,PrecioUnitario,PrecioTotal,Descripcion,Producto_id,FacturaVenta_id,Fecha) "
+                            + "VALUES(?,?,?,?,?,?,?,now())");
+                    CrearLot.setString(1,Ca.getString(1));
+                    CrearLot.setString(2,String.valueOf(cantidad));
+                    CrearLot.setString(3,Ca.getString(3));
+                    double precioTo=0;
+                    precioTo=cantidad*(Double.parseDouble(Ca.getString(3)));
+                    CrearLot.setString(4,String.valueOf(precioTo));
+                    CrearLot.setString(5,Ca.getString(5));
+                    CrearLot.setString(6,idP);
+                    CrearLot.setString(7,idF);
+                    CrearLot.executeUpdate();
+                    CrearLot.close();
+                    PreparedStatement Actualizar = Insertar.prepareStatement("UPDATE Lote set Cantidad=Cantidad-'"+String.valueOf(cantidad)+"'where Disponible=true && Producto_id="+idP+""
+                            + "&& NoLote="+Ca.getString(1)+"");
+                   Actualizar.executeUpdate();
+                   Actualizar.close();
+
+                  }
+                  if(cantidad==Double.parseDouble(Ca.getString(2)))
+                  { 
+                     PreparedStatement CrearLot = Insertar.prepareStatement
+                    ("INSERT INTO LoteVenta(NoLote,Cantidad,PrecioUnitario,PrecioTotal,Descripcion,Producto_id,FacturaVenta_id,Fecha) "
+                            + "VALUES(?,?,?,?,?,?,?,now())");
+                    CrearLot.setString(1,Ca.getString(1));
+                    CrearLot.setString(2,String.valueOf(cantidad));
+                    CrearLot.setString(3,Ca.getString(3));
+                    double precioTo=0;
+                    precioTo=cantidad*(Double.parseDouble(Ca.getString(3)));
+                    CrearLot.setString(4,String.valueOf(precioTo));
+                    CrearLot.setString(5,Ca.getString(5));
+                    CrearLot.setString(6,idP);
+                    CrearLot.setString(7,idF);
+                    CrearLot.executeUpdate();
+                    CrearLot.close();
+                    PreparedStatement Actualizar = Insertar.prepareStatement("UPDATE Lote set Cantidad=0, Disponible=false where Disponible=true && Producto_id="+idP+""
+                            + "&& NoLote="+Ca.getString(1)+"");
+                   Actualizar.executeUpdate();
+                   Actualizar.close();
+                  }
+                  if(cantidad>Double.parseDouble(Ca.getString(2)))
+                  {
+                     
+                    cantidad=cantidad-Double.parseDouble(Ca.getString(2));
+                   
+                       PreparedStatement CrearLot = Insertar.prepareStatement
+                    ("INSERT INTO LoteVenta(NoLote,Cantidad,PrecioUnitario,PrecioTotal,Descripcion,Producto_id,FacturaVenta_id,Fecha) "
+                            + "VALUES(?,?,?,?,?,?,?,now())");
+                    CrearLot.setString(1,Ca.getString(1));
+                    CrearLot.setString(2,Ca.getString(2));
+                    CrearLot.setString(3,Ca.getString(3));
+                    CrearLot.setString(4,Ca.getString(4));
+                    CrearLot.setString(5,Ca.getString(5));
+                    CrearLot.setString(6,idP);
+                    CrearLot.setString(7,idF);
+                    CrearLot.executeUpdate();
+                    CrearLot.close();
+                    PreparedStatement Actualizar = Insertar.prepareStatement("UPDATE Lote set Cantidad=0,Disponible=false where Disponible=true && Producto_id="+idP+""
+                            + "&& NoLote="+Ca.getString(1)+"");
+                    
+                   Actualizar.executeUpdate();
+                   Actualizar.close();
+                      
+
+                  }
+                }
+            }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+     }
+    private int getidProve(String nit) {
+        int nit2 = 0;
+        try {
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT id FROM Cliente WHERE Nit='" + nit + "'");
+            while (Ca.next()) {
+                nit2 = Integer.parseInt(Ca.getString(1));
+
+            }
+            return nit2;
+        } catch (SQLException ex) {
+            Logger.getLogger(Compras.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    private String crearFactura(String Serie,String Numero)
+    {   int idUsuario=0;
+        try {
+            PreparedStatement CrearLot = Insertar.prepareStatement("INSERT INTO FacturaVenta(Total,Serie,Numero,Cliente_id,Fecha"
+                    + ") VALUES(?,?,?,?,now())",Statement.RETURN_GENERATED_KEYS);
+            CrearLot.setString(1, Totales.getText());
+            CrearLot.setString(2, Serie);
+            CrearLot.setString(3, Numero);
+            CrearLot.setString(4, String.valueOf(getidProve(nitglobal)));
+            
+             CrearLot.executeUpdate();
+            
+            
+            try (ResultSet rs = CrearLot.getGeneratedKeys()) {
+                if (!rs.next()) {
+                    throw new RuntimeException("no devolvió el ID");
+                }
+
+                idUsuario = rs.getInt(1);
+                CrearLot.close();
+
+            }
+            return String.valueOf(idUsuario);
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    private void addfilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addfilaActionPerformed
+
         if(Cantidad.getText().equals(""))
         {
-            
+            JOptionPane.showMessageDialog(null, "Ingrese la Cantidad que desea comprar de: "+NombreP.getText());
+
         }
         else
         {   if(Integer.parseInt(Cantidad.getText())<=Integer.parseInt(Existencia.getText()))
-                {
-                    JOptionPane.showMessageDialog(null, "Se puede vender todo");
-                    //modelo.addRow(new Object[]{});
-                    
-
-                }
+                {   
+                    String Completo = (String) Producto.getSelectedItem();
+                    double PrecioUnitar=(Double.parseDouble(Facturacion(CuantosLotes(id(Completo)),id(Completo))))/(Double.parseDouble(Cantidad.getText()));
+                    modelo.addRow(new Object[]{Cantidad.getText(),NombreP.getText(),Marca.getText(),
+                    Facturacion(CuantosLotes(id(Completo)),id(Completo)),PrecioUnitar});
+                    double To=Double.parseDouble(Totales.getText())+Double.parseDouble(Facturacion(CuantosLotes(id(Completo)),id(Completo)));
+                    Totales.setText(String.valueOf(To));
+                }   
             else
             {
                             JOptionPane.showMessageDialog(null, "No se puede");
 
             }
-        }
-    }//GEN-LAST:event_AgregarActionPerformed
-    //Q97
-    private void addfilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addfilaActionPerformed
-        // TODO add your handling code here:
-        modelo.addRow(new Object[]{"","","",""});
+        } // TODO add your handling code here:
     }//GEN-LAST:event_addfilaActionPerformed
 
-    private void elimfilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elimfilaActionPerformed
-        // TODO add your handling code here:
-        modelo.removeRow(modelo.getRowCount()-1);
-    }//GEN-LAST:event_elimfilaActionPerformed
-
-    private void ingresarprod(String ca_, String fc_, String st_, String iva_, String lv_){
-        
-        try {
-            PreparedStatement ingrprod = cn.prepareStatement("INSERT INTO DetalleVenta(Cantidad,FacturaVenta_id,SubTotal,IvaVenta,LoteVenta_id) VALUES(?,?,?,?,?)");
-            ingrprod.setString(1, ca_);
-            ingrprod.setString(2, fc_);
-            ingrprod.setString(3, st_);
-            ingrprod.setString(4, iva_);
-            ingrprod.setString(5, lv_);
-            ingrprod.executeUpdate();
-            ingrprod.close();
-            
-            JOptionPane.showMessageDialog(null, "Nuevo Proveedor Agregado");
-
-        }catch(SQLException ex) {
-            Logger.getLogger(IngresarProve.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
-    
-    private void breturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breturnActionPerformed
-        // TODO add your handling code here:
-        
-        Menu men=new Menu();
-        men.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_breturnActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        //vamos a obtener datos de la tabla Q97
-        String lote;
-        //convertir los datos a string
-        
-        for (int i = 0; i < Factura.getRowCount(); i++) {
-            ingresarprod(Factura.getValueAt(i, 0), Factura.getValueAt(i, 1), Factura.getValueAt(i, 2), Factura.getValueAt(i, 3), lote);
-            
-        }
-        
-        
-        
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void CantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CantidadKeyTyped
+ int k = (int) evt.getKeyChar();
+        if (k >= 97 && k <= 122 || k >= 65 && k <= 90) {
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null, "No puede ingresar letras!!!", "Ventana Error Datos", JOptionPane.ERROR_MESSAGE);
+        }
+        if (k == 241 || k == 209) {
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null, "No puede ingresar letras!!!", "Ventana Error Datos", JOptionPane.ERROR_MESSAGE);
+        }
+        if (k >= 33 && k <=47 ) {
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null, "No puede ingresar Simbolos!!!", "Ventana Error Datos", JOptionPane.ERROR_MESSAGE);
+        }
+        if (k == 10) {
+            Cantidad.transferFocus();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_CantidadKeyTyped
+
+    private void NitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NitActionPerformed
+         nitglobal=(String) Nit.getSelectedItem();
+        String Completo = (String) Nit.getSelectedItem();
+        llenarCl(Completo);
+
+    }//GEN-LAST:event_NitActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+       Menu y=new Menu();
+      y.setVisible(true);
+      dispose();  // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -600,6 +958,8 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JLabel Marca;
     private javax.swing.JLabel MarcaM;
     private javax.swing.JButton MostrarLote;
+    private javax.swing.JLabel N;
+    private javax.swing.JLabel NY;
     private javax.swing.JComboBox<String> Nit;
     private javax.swing.JLabel Nombre;
     private javax.swing.JLabel NombreM;
@@ -608,8 +968,8 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JTextField Numero;
     private javax.swing.JComboBox<String> Producto;
     private javax.swing.JTextField Serie;
+    private javax.swing.JLabel Totales;
     private javax.swing.JButton addfila;
-    private javax.swing.JButton botonagcliente;
     private javax.swing.JButton breturn;
     private javax.swing.JButton elimfila;
     private javax.swing.JButton jButton1;
@@ -618,6 +978,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
