@@ -25,12 +25,13 @@ public class verclientes extends javax.swing.JFrame {
     Conexion con = new Conexion();
    
     Connection Consulta = con.conexion();
-
+    
     /**
      * Creates new form verclientes
      */
     public verclientes() {
         initComponents();
+        this.setDefaultCloseOperation(this.HIDE_ON_CLOSE); 
         
         
         DefaultTableModel modelo=new DefaultTableModel(){
@@ -38,6 +39,11 @@ public class verclientes extends javax.swing.JFrame {
                 return false;
             }
         };
+        modelo.addColumn("Nit");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Telefono");
+        modelo.addColumn("Dirección");
         tcli.setModel(modelo);
         
        String datos[] = new String[5];
@@ -76,6 +82,8 @@ public class verclientes extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tcli = new javax.swing.JTable();
+        addcli = new javax.swing.JButton();
+        actualziar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,6 +105,22 @@ public class verclientes extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 630, 280));
 
+        addcli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/clientead15.png"))); // NOI18N
+        addcli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addcliActionPerformed(evt);
+            }
+        });
+        jPanel1.add(addcli, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 40, 40));
+
+        actualziar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/actualizara17.png"))); // NOI18N
+        actualziar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualziarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(actualziar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, 30, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,11 +129,56 @@ public class verclientes extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addcliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addcliActionPerformed
+        // TODO add your handling code here:
+        Clientes cls = new Clientes();
+        cls.setVisible(true);
+        
+    }//GEN-LAST:event_addcliActionPerformed
+
+    private void actualziarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualziarActionPerformed
+        // TODO add your handling code here:
+     DefaultTableModel modelo=new DefaultTableModel(){
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
+        };
+        modelo.addColumn("Nit");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Telefono");
+        modelo.addColumn("Dirección");
+        tcli.setModel(modelo);
+        
+       String datos[] = new String[5];
+        try {
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT Nit, Nombre, Apellido, Numero, Direccion FROM Cliente;");
+            while(Ca.next()){
+                datos[0] = Ca.getString(1);
+                datos[1] = Ca.getString(2);
+                datos[2] = Ca.getString(3);
+                datos[3] = Ca.getString(4);
+                datos[4] = Ca.getString(5);
+                modelo.addRow(datos);
+                
+                
+            }
+            tcli.setModel(modelo);
+            
+        }catch(SQLException ex){
+            Logger.getLogger(Ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tcli.setVisible(true);
+       
+        
+    }//GEN-LAST:event_actualziarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,6 +216,8 @@ public class verclientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton actualziar;
+    private javax.swing.JButton addcli;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tcli;
