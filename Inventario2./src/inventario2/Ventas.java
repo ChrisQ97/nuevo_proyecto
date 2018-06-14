@@ -175,6 +175,7 @@ public class Ventas extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         Totales = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -410,9 +411,8 @@ public class Ventas extends javax.swing.JFrame {
                             .addGroup(panelproductoLayout.createSequentialGroup()
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(MostrarLote, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(25, 25, 25)))
-                .addContainerGap(74, Short.MAX_VALUE))
+                                .addComponent(MostrarLote, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         panelproductoLayout.setVerticalGroup(
             panelproductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -501,6 +501,14 @@ public class Ventas extends javax.swing.JFrame {
 
         Totales.setText("0000");
         jPanel1.add(Totales, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 440, -1, -1));
+
+        jButton2.setText("Registro de ventas");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 450, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -960,6 +968,12 @@ public class Ventas extends javax.swing.JFrame {
         
     }//GEN-LAST:event_breturnActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        Mostrarventas mt = new Mostrarventas();
+        mt.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1020,6 +1034,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JButton breturn;
     private javax.swing.JButton elimfila;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
