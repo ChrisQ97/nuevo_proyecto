@@ -7,13 +7,22 @@ package inventario2;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author chr97lubuntu
  */
 public class log extends javax.swing.JFrame {
-
+Conexion con = new Conexion();
+   
+    Connection Consulta = con.conexion();
+    boolean verificado;
     /**
      * Creates new form log
      */
@@ -21,6 +30,7 @@ public class log extends javax.swing.JFrame {
         initComponents();
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();    
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        
     }
 
     /**
@@ -90,6 +100,46 @@ public class log extends javax.swing.JFrame {
 
     private void ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresarActionPerformed
         // TODO add your handling code here:
+        verificado = false;
+        String us = usuario.getText();
+        
+        char claves[]=clave.getPassword();
+        String clavedef=new String(claves);
+        String puest=" ";
+        
+        try{
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT Usuario, Clave, Puesto FROM empleados");
+            while (Ca.next()) {
+               // System.out.println(Ca.getString(1)+" -- "+Ca.getString(2));
+               // System.out.println(us+"***"+clavedef);
+               if((us.equals(Ca.getString(1)))&&(clavedef.equals(Ca.getString(2)))){
+                   verificado=true;
+                   //System.out.println("entre");
+                   puest=Ca.getString(3);
+               }
+                              
+            }
+            
+        }catch(SQLException ex){
+            Logger.getLogger(Ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(verificado==true){
+            System.out.println("Bienvenido "+us);
+            if(puest.equals("vendedor")){
+            this.hide();
+            Menuvendedor mn = new Menuvendedor();
+            mn.setVisible(true); 
+            }
+            else{
+                Menu mnn = new Menu();
+                mnn.setVisible(true);
+            }
+            
+        }
+        else{
+            //System.out.println("no");
+        }
     }//GEN-LAST:event_ingresarActionPerformed
 
     /**
