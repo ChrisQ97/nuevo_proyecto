@@ -4,18 +4,41 @@
  * and open the template in the editor.
  */
 package inventario2;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
  * @author chr97lubuntu
  */
 public class rh extends javax.swing.JFrame {
+    Conexion con = new Conexion();
+    Connection Consulta = con.conexion();
 
     /**
      * Creates new form rh
      */
     public rh() {
         initComponents();
+        this.setDefaultCloseOperation(this.HIDE_ON_CLOSE); 
+        DefaultTableModel modelo = new DefaultTableModel() {
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return false;
+                }
+        };
+        modelo.addColumn("Id");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        
+        
     }
 
     /**
@@ -42,7 +65,7 @@ public class rh extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(189, 189, 189));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/image.png"))); // NOI18N
         jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 102), 1, true));
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 90));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -65,7 +88,7 @@ public class rh extends javax.swing.JFrame {
         planilla.setBackground(new java.awt.Color(189, 189, 189));
         planilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/plani28.png"))); // NOI18N
         planilla.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 102), 1, true));
-        jPanel1.add(planilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 100, -1));
+        jPanel1.add(planilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 100, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
