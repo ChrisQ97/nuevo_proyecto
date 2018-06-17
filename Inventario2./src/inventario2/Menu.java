@@ -115,6 +115,11 @@ public class Menu extends javax.swing.JFrame {
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, -1, -1));
 
         botonrh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/rh37.png"))); // NOI18N
+        botonrh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonrhActionPerformed(evt);
+            }
+        });
         jPanel2.add(botonrh, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 90, 70));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -198,6 +203,12 @@ System.exit(0);
         verprove prov = new verprove();
         prov.setVisible(true);
     }//GEN-LAST:event_botonprovActionPerformed
+
+    private void botonrhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonrhActionPerformed
+        // TODO add your handling code here:
+       rh rhh = new rh();
+       rhh.setVisible(true);
+    }//GEN-LAST:event_botonrhActionPerformed
 
     /**
      * @param args the command line arguments

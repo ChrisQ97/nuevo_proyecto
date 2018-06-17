@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package inventario2;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,14 +31,46 @@ public class rh extends javax.swing.JFrame {
     public rh() {
         initComponents();
         this.setDefaultCloseOperation(this.HIDE_ON_CLOSE); 
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();    
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         DefaultTableModel modelo = new DefaultTableModel() {
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
                     return false;
                 }
         };
-        modelo.addColumn("Id");
         modelo.addColumn("Nombre");
         modelo.addColumn("Apellido");
+        modelo.addColumn("DPI");
+        modelo.addColumn("Telefono");
+        modelo.addColumn("Celular");
+        modelo.addColumn("Sueldo.");
+        modelo.addColumn("Puesto");
+        emple.setModel(modelo);
+        String datos[] = new String[7];
+        try {
+
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT Nombre, Apellido, DPI, Telefono, Celular, Sueldo, Puesto FROM empleados");
+          
+            while (Ca.next()) {
+               
+                datos[0] = Ca.getString(1);
+                datos[1] = Ca.getString(2);
+                datos[2] = Ca.getString(3);
+                datos[3] = Ca.getString(4);
+                datos[4] = Ca.getString(5);
+                datos[5] = Ca.getString(6);
+                datos[6] = Ca.getString(7);
+                             
+                modelo.addRow(datos);
+                
+            }
+            emple.setModel(modelo);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        emple.setVisible(true);
         
         
     }
@@ -51,9 +85,9 @@ public class rh extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        addemple = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        emple = new javax.swing.JTable();
         regresar = new javax.swing.JButton();
         planilla = new javax.swing.JButton();
 
@@ -62,12 +96,17 @@ public class rh extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(189, 189, 189));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(189, 189, 189));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/image.png"))); // NOI18N
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 102), 1, true));
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 90));
+        addemple.setBackground(new java.awt.Color(189, 189, 189));
+        addemple.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/image.png"))); // NOI18N
+        addemple.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 102), 1, true));
+        addemple.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addempleActionPerformed(evt);
+            }
+        });
+        jPanel1.add(addemple, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 90));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        emple.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -78,12 +117,17 @@ public class rh extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(emple);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 610, 290));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 730, 290));
 
         regresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/regresara7.png"))); // NOI18N
-        jPanel1.add(regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 340, 50, -1));
+        regresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regresarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 340, 50, -1));
 
         planilla.setBackground(new java.awt.Color(189, 189, 189));
         planilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/plani28.png"))); // NOI18N
@@ -94,7 +138,7 @@ public class rh extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 840, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 867, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,6 +147,20 @@ public class rh extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addempleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addempleActionPerformed
+        // TODO add your handling code here:
+        agregaremple aem = new agregaremple();
+        aem.setVisible(true);
+    }//GEN-LAST:event_addempleActionPerformed
+
+    private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
+        // TODO add your handling code here
+        Menu men=new Menu();
+        men.setVisible(true);
+        dispose();
+        
+    }//GEN-LAST:event_regresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,10 +198,10 @@ public class rh extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton addemple;
+    private javax.swing.JTable emple;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton planilla;
     private javax.swing.JButton regresar;
     // End of variables declaration//GEN-END:variables

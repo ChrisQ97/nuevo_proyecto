@@ -126,14 +126,16 @@ Conexion con = new Conexion();
         }
         if(verificado==true){
             System.out.println("Bienvenido "+us);
-            if(puest.equals("vendedor")){
+            if(puest.equals("Vendedor")){
             this.hide();
             Menuvendedor mn = new Menuvendedor();
             mn.setVisible(true); 
             }
             else{
+                this.hide();
                 Menu mnn = new Menu();
                 mnn.setVisible(true);
+                
             }
             
         }
