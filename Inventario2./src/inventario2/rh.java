@@ -133,6 +133,11 @@ public class rh extends javax.swing.JFrame {
         planilla.setBackground(new java.awt.Color(189, 189, 189));
         planilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/plani28.png"))); // NOI18N
         planilla.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 102), 1, true));
+        planilla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                planillaActionPerformed(evt);
+            }
+        });
         jPanel1.add(planilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 100, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/actualizara17.png"))); // NOI18N
@@ -215,6 +220,12 @@ public class rh extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void planillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_planillaActionPerformed
+        // TODO add your handling code here:
+        planilla pl = new planilla();
+        pl.setVisible(true);
+    }//GEN-LAST:event_planillaActionPerformed
 
     /**
      * @param args the command line arguments
