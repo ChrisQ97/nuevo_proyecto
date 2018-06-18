@@ -7,12 +7,27 @@ package inventario2;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author chr97lubuntu
  */
 public class agregaremple extends javax.swing.JFrame {
+    Conexion con = new Conexion();
+    Connection cn = con.conexion();
+    Connection tr = con.conexion();
+    Connection us = con.conexion();
+    boolean disponible =true;
 
     /**
      * Creates new form agregaremple
@@ -22,6 +37,8 @@ public class agregaremple extends javax.swing.JFrame {
         this.setDefaultCloseOperation(this.HIDE_ON_CLOSE); 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();    
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+      //  boxpuesto.addItem("Vendedor");
+       // boxpuesto.addItem("Dueño");
         
         
     }
@@ -58,8 +75,12 @@ public class agregaremple extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         guardar = new javax.swing.JButton();
-        vendedor = new javax.swing.JRadioButton();
-        admin = new javax.swing.JRadioButton();
+        jLabel9 = new javax.swing.JLabel();
+        anio = new javax.swing.JTextField();
+        mes = new javax.swing.JTextField();
+        dia = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        boxpuesto = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,6 +100,11 @@ public class agregaremple extends javax.swing.JFrame {
         jLabel8.setText("Q");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/veria5.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Nombre");
 
@@ -105,9 +131,16 @@ public class agregaremple extends javax.swing.JFrame {
             }
         });
 
-        vendedor.setText("Vendedor");
+        jLabel9.setText("Inicio de labores (año, mes,dia)");
 
-        admin.setText("Administrador");
+        jLabel12.setText("En números");
+
+        boxpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vendedor","Dueño" }));
+        boxpuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxpuestoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout paneldatosLayout = new javax.swing.GroupLayout(paneldatos);
         paneldatos.setLayout(paneldatosLayout);
@@ -128,16 +161,27 @@ public class agregaremple extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(paneldatosLayout.createSequentialGroup()
-                                .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(dpi, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, paneldatosLayout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(sueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(celular, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(telefono, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                                .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(dpi, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, paneldatosLayout.createSequentialGroup()
+                                            .addGap(12, 12, 12)
+                                            .addComponent(jLabel8)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(sueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(celular, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(telefono, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(paneldatosLayout.createSequentialGroup()
+                                        .addComponent(anio, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel12)
+                                            .addGroup(paneldatosLayout.createSequentialGroup()
+                                                .addComponent(mes, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(dia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                                 .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneldatosLayout.createSequentialGroup()
                                         .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,26 +201,23 @@ public class agregaremple extends javax.swing.JFrame {
                                     .addComponent(nombre)
                                     .addComponent(apellido)
                                     .addComponent(direccion, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(admin)
-                                    .addComponent(vendedor)))))
+                                .addGap(18, 18, 18)
+                                .addComponent(boxpuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addComponent(jLabel3))
-                .addGap(22, 22, 22))
+                .addGap(14, 14, 14))
         );
         paneldatosLayout.setVerticalGroup(
             paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneldatosLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(20, 20, 20)
                 .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(vendedor))
+                    .addComponent(boxpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(admin))
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -187,11 +228,9 @@ public class agregaremple extends javax.swing.JFrame {
                         .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4))
                     .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(paneldatosLayout.createSequentialGroup()
-                            .addGap(4, 4, 4)
-                            .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel10)))
+                        .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,17 +246,26 @@ public class agregaremple extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(dpi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)))
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel12)
+                        .addGap(8, 8, 8)
+                        .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(anio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(paneldatosLayout.createSequentialGroup()
                         .addGroup(paneldatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11))
                         .addGap(18, 18, 18)
                         .addComponent(guardar)))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
-        jPanel1.add(paneldatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 620, 350));
+        jPanel1.add(paneldatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 620, 370));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -239,7 +287,64 @@ public class agregaremple extends javax.swing.JFrame {
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
         // TODO add your handling code here:
+         if (disponible==false || nombre.getText().equals("") || apellido.getText().equals("") || dpi.getText().equals("")
+                || telefono.getText().equals("") || direccion.getText().equals("") || usuario.getText().equals("")|| contraseña.getText().equals("")|| celular.getText().equals("")|| anio.getText().equals("")|| dia.getText().equals("")|| mes.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Revise que todos los campos esten llenos");
+
+        } else {
+            try {
+            PreparedStatement CrearEm = cn.prepareStatement("INSERT INTO empleados(Nombre,Apellido,Direccion,Telefono,Celular,Sueldo,DPI,Puesto,Inicio,Fin,Usuario,Clave) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+            CrearEm.setString(1, nombre.getText());
+            CrearEm.setString(2, apellido.getText());
+            CrearEm.setString(3, direccion.getText());
+            CrearEm.setString(4, telefono.getText());
+            CrearEm.setString(5, celular.getText());
+            float suel=Float.parseFloat(sueldo.getText());
+            CrearEm.setString(6, String.valueOf(suel));
+            CrearEm.setString(7,dpi.getText());
+            CrearEm.setString(8,boxpuesto.getSelectedItem().toString());//puesto
+            String ini = anio.getText()+"-"+mes.getText()+"-"+dia.getText();
+            CrearEm.setString(9,ini);//inicio
+            CrearEm.setString(10,"1900-01-01");//fin
+            CrearEm.setString(11,usuario.getText());//usuario
+            CrearEm.setString(12,contraseña.getText());//clave
+            CrearEm.executeUpdate();
+            CrearEm.close();
+            JOptionPane.showMessageDialog(null, "Nuevo empleado Agregado");
+                }
+            catch (SQLException ex) {
+                Logger.getLogger(IngresarProve.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            dispose();
+        }
+
     }//GEN-LAST:event_guardarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        disponible=true;
+        try{
+            Statement st = us.createStatement();
+            ResultSet rd = st.executeQuery("SELECT Usuario FROM empleados");
+            while(rd.next()){  
+                if(usuario.getText().equals(rd.getString(1))){  
+                    disponible=false;
+                    JOptionPane.showMessageDialog(null, "Usuario no disponible");
+                }
+            }
+            if(disponible==true){
+                JOptionPane.showMessageDialog(null, "Usuario disponible");
+            }
+            
+        }catch (SQLException ex) {
+                Logger.getLogger(IngresarProve.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void boxpuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxpuestoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxpuestoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,10 +382,12 @@ public class agregaremple extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton admin;
+    private javax.swing.JTextField anio;
     private javax.swing.JTextField apellido;
+    private javax.swing.JComboBox<String> boxpuesto;
     private javax.swing.JTextField celular;
     private javax.swing.JTextField contraseña;
+    private javax.swing.JTextField dia;
     private javax.swing.JTextField direccion;
     private javax.swing.JTextField dpi;
     private javax.swing.JButton guardar;
@@ -288,6 +395,7 @@ public class agregaremple extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -295,12 +403,13 @@ public class agregaremple extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField mes;
     private javax.swing.JTextField nombre;
     private javax.swing.JPanel paneldatos;
     private javax.swing.JTextField sueldo;
     private javax.swing.JTextField telefono;
     private javax.swing.JTextField usuario;
-    private javax.swing.JRadioButton vendedor;
     // End of variables declaration//GEN-END:variables
 }

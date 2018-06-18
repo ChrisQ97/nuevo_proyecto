@@ -90,6 +90,7 @@ public class rh extends javax.swing.JFrame {
         emple = new javax.swing.JTable();
         regresar = new javax.swing.JButton();
         planilla = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,6 +135,14 @@ public class rh extends javax.swing.JFrame {
         planilla.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 102), 1, true));
         jPanel1.add(planilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 100, -1));
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/actualizara17.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, 40, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,6 +170,51 @@ public class rh extends javax.swing.JFrame {
         dispose();
         
     }//GEN-LAST:event_regresarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel modelo = new DefaultTableModel() {
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return false;
+                }
+        };
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("DPI");
+        modelo.addColumn("Telefono");
+        modelo.addColumn("Celular");
+        modelo.addColumn("Sueldo.");
+        modelo.addColumn("Puesto");
+        emple.setModel(modelo);
+        String datos[] = new String[7];
+        try {
+
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT Nombre, Apellido, DPI, Telefono, Celular, Sueldo, Puesto FROM empleados");
+          
+            while (Ca.next()) {
+               
+                datos[0] = Ca.getString(1);
+                datos[1] = Ca.getString(2);
+                datos[2] = Ca.getString(3);
+                datos[3] = Ca.getString(4);
+                datos[4] = Ca.getString(5);
+                datos[5] = Ca.getString(6);
+                datos[6] = Ca.getString(7);
+                             
+                modelo.addRow(datos);
+                
+            }
+            emple.setModel(modelo);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        emple.setVisible(true);
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,6 +254,7 @@ public class rh extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addemple;
     private javax.swing.JTable emple;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton planilla;
