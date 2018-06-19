@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -140,6 +141,7 @@ Conexion con = new Conexion();
             
         }
         else{
+            JOptionPane.showMessageDialog(null, "Datos incorrectos");
             //System.out.println("no");
         }
     }//GEN-LAST:event_ingresarActionPerformed

@@ -91,6 +91,8 @@ public class rh extends javax.swing.JFrame {
         regresar = new javax.swing.JButton();
         planilla = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        prestamo = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -147,6 +149,23 @@ public class rh extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, 40, -1));
+
+        prestamo.setText("prestamo");
+        prestamo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prestamoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(prestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+
+        jButton2.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jButton2.setText("Ver prestamos");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 130, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -223,9 +242,24 @@ public class rh extends javax.swing.JFrame {
 
     private void planillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_planillaActionPerformed
         // TODO add your handling code here:
-        planilla pl = new planilla();
-        pl.setVisible(true);
+        pl pla = new pl();
+        pla.setVisible(true);
+        
+        
+        
     }//GEN-LAST:event_planillaActionPerformed
+
+    private void prestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prestamoActionPerformed
+        // TODO add your handling code here:
+        prestamoemp pem = new prestamoemp();
+        pem.setVisible(true);
+    }//GEN-LAST:event_prestamoActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        verprestamos vp = new verprestamos();
+        vp.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,9 +300,11 @@ public class rh extends javax.swing.JFrame {
     private javax.swing.JButton addemple;
     private javax.swing.JTable emple;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton planilla;
+    private javax.swing.JButton prestamo;
     private javax.swing.JButton regresar;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,12 @@ package inventario2;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,6 +20,10 @@ import javax.swing.table.DefaultTableModel;
  * @author chr97lubuntu
  */
 public class planilla extends javax.swing.JFrame {
+    Conexion con = new Conexion();
+   
+    Connection Consulta = con.conexion();
+
 
     /**
      * Creates new form planilla
@@ -23,32 +33,7 @@ public class planilla extends javax.swing.JFrame {
         this.setDefaultCloseOperation(this.HIDE_ON_CLOSE);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();    
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        DefaultTableModel modelo = new DefaultTableModel() {
-                public boolean isCellEditable(int rowIndex, int columnIndex) {
-                    return false;
-                }
-        };
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Cargo");
-        modelo.addColumn("Sueldo");
-        modelo.addColumn("Total Devengado");
-        modelo.addColumn("IGSS");
-        modelo.addColumn("Anticipos");
-        modelo.addColumn("Total Descuentos");
-        modelo.addColumn("Total Liquido");
         
-        
-        datos.setModel(modelo);
-        
-        
-        
-        
-        ///
-        
-        datos.setVisible(true);
-        datos.getColumn("Nombre").setPreferredWidth(2);
-        datos.getColumn("Cargo").setPreferredWidth(10);
-        datos.getColumn("Sueldo").setPreferredWidth(100);
         
     }
 
@@ -64,6 +49,13 @@ public class planilla extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         datos = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        mes = new javax.swing.JComboBox<>();
+        anio = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        totdesc = new javax.swing.JLabel();
+        totliq = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,7 +75,29 @@ public class planilla extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(datos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1270, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1270, 350));
+
+        jButton1.setText("Cargar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
+
+        mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+        jPanel1.add(mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
+        anio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+        jPanel1.add(anio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
+
+        jLabel1.setText("Sumatoria total de descuentos");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 410, -1, -1));
+
+        jLabel2.setText("Sumatoria total liquido");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 410, -1, -1));
+        jPanel1.add(totdesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 430, 150, 20));
+        jPanel1.add(totliq, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 430, 130, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,6 +113,88 @@ public class planilla extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        float sueld=0;
+        float desct=0;
+        float liqt=0;
+        DefaultTableModel modelo = new DefaultTableModel() {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
+        };
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Cargo");
+        modelo.addColumn("Sueldo");
+        modelo.addColumn("Total Devengado");
+        modelo.addColumn("IGSS");
+        modelo.addColumn("Descuentos");
+        modelo.addColumn("Total Descuentos");
+        modelo.addColumn("Total Liquido");
+
+        datos.setModel(modelo);
+
+        //
+        String data[] = new String[9];
+
+        try{
+
+            Statement sx = Consulta.createStatement();
+            //cargo, total devengado+250, 
+            ResultSet Ca = sx.executeQuery("SELECT nombre, apellido,sueldobase, igss, descuento from detalleplanilla WHERE mes='"+mes.getSelectedItem().toString()+"'AND anio='"+anio.getSelectedItem().toString()+"'");
+//mes.getSelectedItem().toString());
+ //           CrearEm.setString(7, anio.getSelectedItem().toString());
+            while (Ca.next()) {
+                
+                sueld=Float.parseFloat(Ca.getString(3))+250;
+                data[0] = Ca.getString(1);
+                data[1] = Ca.getString(2);
+                data[2] = obtenercargo(Ca.getString(1),Ca.getString(2));
+                data[3] = Ca.getString(3);
+                data[4] = String.valueOf(sueld);
+                data[5] = Ca.getString(4);
+                float igsss=Float.parseFloat(Ca.getString(4));
+                data[6] = Ca.getString(5);
+                float desc=Float.parseFloat(Ca.getString(5));
+                data[7] = String.valueOf(igsss+desc);
+                desct=desct+igsss+desc;
+                data[8] = String.valueOf(sueld-igsss-desc);
+                liqt=liqt+sueld;
+                
+                modelo.addRow(data);
+
+            }
+            datos.setModel(modelo);
+        }       
+
+      catch (SQLException ex) {        
+            Logger.getLogger(planilla.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        liqt=liqt-desct;
+        totdesc.setText("Q. "+String.valueOf(desct));
+        totliq.setText("Q. "+String.valueOf(liqt));
+        datos.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+private String obtenercargo(String nombre, String ape){
+    String cat="";
+    try{
+
+            Statement sx = Consulta.createStatement();
+            //cargo, total devengado+250, 
+            ResultSet Ca = sx.executeQuery("SELECT Puesto from empleados WHERE Nombre='"+nombre+"'AND Apellido='"+ape+"'");
+
+            while (Ca.next()) {
+                cat=Ca.getString(1);
+             }
+        }       
+
+      catch (SQLException ex) {        
+            Logger.getLogger(planilla.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    return cat;
+    
+}
     /**
      * @param args the command line arguments
      */
@@ -135,8 +231,15 @@ public class planilla extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> anio;
     private javax.swing.JTable datos;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> mes;
+    private javax.swing.JLabel totdesc;
+    private javax.swing.JLabel totliq;
     // End of variables declaration//GEN-END:variables
 }
