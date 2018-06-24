@@ -43,6 +43,11 @@ public class vfin extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         botonbalance.setText("Ver balance");
+        botonbalance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonbalanceActionPerformed(evt);
+            }
+        });
         jPanel1.add(botonbalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 210, -1));
 
         botoner.setText("Ver estado de resultados");
@@ -69,7 +74,14 @@ public class vfin extends javax.swing.JFrame {
 
     private void botonerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonerActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_botonerActionPerformed
+
+    private void botonbalanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonbalanceActionPerformed
+        // TODO add your handling code here:
+        er balance = new er();
+        balance.setVisible(true);
+    }//GEN-LAST:event_botonbalanceActionPerformed
 
     /**
      * @param args the command line arguments

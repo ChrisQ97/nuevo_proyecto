@@ -5,18 +5,124 @@
  */
 package inventario2;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author chr97lubuntu
  */
 public class er extends javax.swing.JFrame {
-
+Conexion con = new Conexion();
+   
+    Connection Consulta = con.conexion();
     /**
      * Creates new form er
      */
     public er() {
         initComponents();
-        ldia.setText("31");
+        //ldia.setText("31");
+        this.setDefaultCloseOperation(this.HIDE_ON_CLOSE); 
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();    
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        
+        DefaultTableModel modelo = new DefaultTableModel() {
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return false;
+                }
+            };
+            modelo.addColumn("                          ");
+            modelo.addColumn("                ");
+            modelo.addColumn("                ");
+            modelo.addColumn("                ");
+            cuentas.setModel(modelo);
+            
+            String datos[] = new String[4];
+            
+            
+            datos[0]="      Activo         ";
+            datos[1]="";
+            datos[2]="";
+            datos[3]="";
+            modelo.addRow(datos);
+            datos[0]="      Corriente         ";
+            datos[1]="";
+            datos[2]="";
+            datos[3]="";
+            modelo.addRow(datos);
+            
+                    
+
+          try {
+
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT nombre, saldo from  cuentasbalance");
+          
+            while (Ca.next()) {
+               
+                datos[0] = Ca.getString(1);
+                datos[1] = Ca.getString(2);
+                datos[2] = "";
+                datos[3]="";
+                
+                modelo.addRow(datos);
+                
+                if(datos[0].equals("Inversiones a corto plazo")){
+                    datos[0] = "           No corriente";
+                    datos[1] = "";
+                    datos[2] = "";
+                    datos[3]="";
+                    modelo.addRow(datos);
+                }
+                if(datos[0].equals("Inversiones a largo plazo")){
+                    datos[0] = "           Pasivo";
+                    datos[1] = "";
+                    datos[2] = "";
+                    datos[3]="";
+                    modelo.addRow(datos);
+                    datos[0] = "           Corriente";
+                    datos[1] = "";
+                    datos[2] = "";
+                    datos[3]="";
+                    modelo.addRow(datos);
+                }
+                if(datos[0].equals("Intereses percibidos no devengados")){
+                   
+                    datos[0] = "           No Corriente";
+                    datos[1] = "";
+                    datos[2] = "";
+                    datos[3]="";
+                    modelo.addRow(datos);
+                }
+                if(datos[0].equals("Reserva para jubilaciones")){
+                   
+                    datos[0] = "           Patrimonio neto";
+                    datos[1] = "";
+                    datos[2] = "";
+                    datos[3]="";
+                    modelo.addRow(datos);
+                }
+                
+            }
+            cuentas.setModel(modelo);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        cuentas.setVisible(true);
+        cuentas.getColumn("                          ").setPreferredWidth(200);
+            
+            
+            
+            
+            
     }
 
     /**
@@ -33,6 +139,12 @@ public class er extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         ldia = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        mes = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        anio = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        cuentas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,10 +158,33 @@ public class er extends javax.swing.JFrame {
 
         jLabel2.setText("Balance de situación general al ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 230, -1));
-        jPanel1.add(ldia, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 30, -1));
+        jPanel1.add(ldia, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 30, 10));
 
         jLabel3.setText("de");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
+        jPanel1.add(mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 110, 20));
+
+        jLabel5.setText("de");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, -1, -1));
+        jPanel1.add(anio, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 70, 10));
+
+        jLabel4.setText("(Cifras en quetzales)");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 160, -1));
+
+        cuentas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(cuentas);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 770, 270));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -59,9 +194,7 @@ public class er extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
         );
 
         pack();
@@ -103,10 +236,16 @@ public class er extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel anio;
+    private javax.swing.JTable cuentas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel ldia;
+    private javax.swing.JLabel mes;
     // End of variables declaration//GEN-END:variables
 }
