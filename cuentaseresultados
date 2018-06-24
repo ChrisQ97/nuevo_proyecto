@@ -1,6 +1,6 @@
 INSERT INTO cuentasestador(nombre,saldo)
 values("Ventas",0),("(-) Devoluciones y rebajas sobre ventas",0),("Mercaderias (Inventario inicial)",0),
-("(+) Compras",0),("(+)Gastos sobre compras",0),("(-)Devoluciones y rebajas sobre compras",0),
+("(+) Compras",0),("(+) Gastos sobre compras",0),("(-) Devoluciones y rebajas sobre compras",0),
 ("(-) Mercaderias (Inventario Final)",0),("Créditos Recuperados",0),("Regalías percibidas",0),
 ("Sueldos sala de ventas",0),("Comisiones sobre ventas",0),("Bonificaciones incentivo sala de ventas",0),
 ("Reparacion de vehículos de reparto",0),("Seguros vencidos sala de ventas",0),("Depreciación vehículos de reparto",0),

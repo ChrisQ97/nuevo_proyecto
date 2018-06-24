@@ -7,13 +7,16 @@ package inventario2;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.Connection;
 
 /**
  *
  * @author chr97lubuntu
  */
 public class vfin extends javax.swing.JFrame {
-
+Conexion con = new Conexion();
+   
+    Connection Consulta = con.conexion();
     /**
      * Creates new form vfin
      */
@@ -74,6 +77,9 @@ public class vfin extends javax.swing.JFrame {
 
     private void botonerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonerActionPerformed
         // TODO add your handling code here:
+        resultados err = new resultados();
+        err.setVisible(true);
+        
         
     }//GEN-LAST:event_botonerActionPerformed
 
