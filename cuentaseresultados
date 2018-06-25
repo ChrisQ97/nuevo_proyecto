@@ -14,9 +14,7 @@ values("Ventas",0),("(-) Devoluciones y rebajas sobre ventas",0),("Mercaderias (
 ("Amortización marcas y patentes",0),("Amortización derecho de llave",0),("Amortización crédito mercantil",0),("Amortización derechos literarios",0),
 ("Cuotas patronales de administración",0),("Combustibles y lubricantes consumidos de oficina",0),("Alquiler de oficina",0),("Indemnización de administración",0),
 ("Aguinaldos de administración",0),("Bono 14 de administración",0),("Vacaciones administración",0),("Papelería y útiles consumidos ",0),("IUSI de oficinas",0),
-("Cuentas incobrables",0),("Gastos diversos de oficina",0),("Regalías",0),("Intereses gasto",0),("Comisiones bancarias",0),("Descuentos sobre ventas",0),
-("Intereses percibidos",0),("Descuentos sobre compras",0),("Dividendos percibidos",0),("Donativos",0),("Pérdida de capital",0),("Alquileres cobrados",0),
-("Comisiones percibidas",0),("Ganancia de capital",0),("Ganancia en negociación de activos",0),("Premios de lotería",0)
+("Cuentas incobrables",0),("Gastos diversos de oficina",0)
 
 
 

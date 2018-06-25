@@ -49,7 +49,6 @@ public class resultados extends javax.swing.JFrame {
             cuentas.setModel(modelo);
             
             String datos[] = new String[4];
-           
             datos[0]="      Ingresos         ";
             datos[1]="";
             datos[2]="";
@@ -63,13 +62,16 @@ public class resultados extends javax.swing.JFrame {
             ResultSet Ca = sx.executeQuery("SELECT nombre, saldo from  cuentasestador");
           
             while (Ca.next()) {
-               
+                
                 datos[0] = Ca.getString(1);
                 datos[1] = Ca.getString(2);
                 datos[2] = "";
                 datos[3]="";
+                if(!datos[1].equals("0")){
+                   modelo.addRow(datos);
+                }
                 
-                modelo.addRow(datos);
+               
                 
                 if(datos[0].equals("Ventas netas")){
                     datos[0] = "           Costo de Ventas";
@@ -131,21 +133,31 @@ public class resultados extends javax.swing.JFrame {
                     modelo.addRow(datos);
                     
                 }//Gastos diversos de oficina
-                if(datos[0].equals("Gastos diversos de oficina")){
-                   
-                    datos[0] = "Otros gastos de operación";
-                    datos[1] = "";
-                    datos[2] = "";
-                    datos[3]="";
-                    modelo.addRow(datos);
-                    
-                }
-                if(datos[0].equals("Regalías")&&datos[1].equals("0")){
-                   
-                    //eliminar las dos filas inseertadas
-                    
-                }   
+               
+               
+             
             }
+            String antes[] = new String[4];
+            antes[0]="Ganancia antes de ISR         ";
+            antes[1]="";
+            antes[2]="";
+            antes[3]="";
+            modelo.addRow(antes);
+            String impuesto[] = new String[4];
+            impuesto[0]="(-) Impuesto sobre la renta por pagar         ";
+            impuesto[1]="";
+            impuesto[2]="";
+            impuesto[3]="";
+            modelo.addRow(impuesto);
+            
+             String despues[] = new String[4];
+            despues[0]="Ganancia despues del impuesto sobre la renta";
+            despues[1]="";
+            despues[2]="";
+            despues[3]="";
+            modelo.addRow(despues);
+            
+                
             cuentas.setModel(modelo);
             
         } catch (SQLException ex) {
