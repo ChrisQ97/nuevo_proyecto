@@ -8,6 +8,7 @@ package inventario2;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,6 +24,7 @@ public class resultados extends javax.swing.JFrame {
     Conexion con = new Conexion();
    
     Connection Consulta = con.conexion();
+    Connection cn = con.conexion();
     /**
      * Creates new form resultados
      */
@@ -55,6 +57,23 @@ public class resultados extends javax.swing.JFrame {
             datos[3]="";
             modelo.addRow(datos);
                     
+            
+            float ventasbrutas=0;
+            float valor=0;
+            float ventasnetas=0;
+            float inimer=0;
+            float comp=0;
+            float gtscomp=0;
+            float compb=0;
+            float devscomp=0;
+            float compn=0;
+            float mercd=0;
+            float invfmerc=0;
+            float costodev=0;
+            float mgbruto=0;
+            float gastos=0;
+            float gananciat=0;
+            float isrporpagar=0;
 
           try {
 
@@ -67,49 +86,98 @@ public class resultados extends javax.swing.JFrame {
                 datos[1] = Ca.getString(2);
                 datos[2] = "";
                 datos[3]="";
+              
+                gastos+=Float.parseFloat(datos[1]);
+                
                 if(!datos[1].equals("0")){
                    modelo.addRow(datos);
                 }
-                
-               
-                
-                if(datos[0].equals("Ventas netas")){
+                 if(datos[0].equals("Ventas")){
+                    ventasbrutas= Float.parseFloat(datos[1]);
+                }
+                if(datos[0].equals("(-) Devoluciones y rebajas sobre ventas")){
+                    valor = Float.parseFloat(datos[1]);
+                    datos[0] = "Ventas Netas";
+                    ventasnetas=ventasbrutas-valor;
+                    datos[1] = String.valueOf(ventasnetas);
+                    datos[2] = "";
+                    datos[3]="";
+                    modelo.addRow(datos);
                     datos[0] = "           Costo de Ventas";
                     datos[1] = "";
                     datos[2] = "";
                     datos[3]="";
                     modelo.addRow(datos);
                 }
+                if(datos[0].equals("(+) Compras")){
+                    comp=Float.parseFloat(datos[1]);
+                }
                 if(datos[0].equals("(+) Gastos sobre compras")){
+                    gtscomp=Float.parseFloat(datos[1]);
+                    compb=comp+gtscomp;
+                    
                     datos[0] = "Compras brutas";
-                    datos[1] = "";
+                    datos[1] = String.valueOf(compb);
                     datos[2] = "";
                     datos[3]="";
                     modelo.addRow(datos);
+                }
+                
+                if(datos[0].equals("Mercaderias (Inventario inicial)")){
+                    inimer=Float.parseFloat(datos[1]);
+                }
+                
+                /*
+                if(datos[0].equals("")){
                     
                 }
+                datos[1]
+                float ventasbrutas=0;
+            float valor=0;
+            float ventasnetas=0;
+            float inimer=0;
+            float comp=0;
+            float gtscomp=0;//
+            float compb=0;
+            float devscomp=0;
+            float compn=0;
+            float mercd=0;
+            float invfmerc=0;
+            float costodev=0;
+            float mgbruto=0;
+                
+                
+                
+                */
+                
+                
+             
                 if(datos[0].equals("(-) Devoluciones y rebajas sobre compras")){
-                   
+                    devscomp=Float.parseFloat(datos[1]);
                     datos[0] = "Compras netas";
-                    datos[1] = "";
+                    compn=compb-devscomp;
+                    datos[1] = String.valueOf(compn);
                     datos[2] = "";
                     datos[3]="";
                     modelo.addRow(datos);
+                    mercd=inimer-compn;
                       datos[0] = "Mercaderias disponibles";
-                    datos[1] = "";
+                    datos[1] = String.valueOf(mercd);
                     datos[2] = "";
                     datos[3]="";
                     modelo.addRow(datos);
                 }
                 if(datos[0].equals("(-) Mercaderias (Inventario Final)")){
-                   
+                    invfmerc=Float.parseFloat(datos[1]);
+                    costodev=mercd-invfmerc;
                     datos[0] = "Costo de ventas";
-                    datos[1] = "";
+                    datos[1] = String.valueOf(costodev);
                     datos[2] = "";
                     datos[3]="";
                     modelo.addRow(datos);
+                    mgbruto=ventasnetas-costodev;
                     datos[0] = "Margen bruto";
-                    datos[1] = "";
+                    datos[1] = String.valueOf(mgbruto);
                     datos[2] = "";
                     datos[3]="";
                     modelo.addRow(datos);
@@ -123,6 +191,7 @@ public class resultados extends javax.swing.JFrame {
                     datos[2] = "";
                     datos[3]="";
                     modelo.addRow(datos);
+                    gastos=0;
                 }//
                  if(datos[0].equals("Gastos diversos sala de ventas")){
                    
@@ -137,22 +206,25 @@ public class resultados extends javax.swing.JFrame {
                
              
             }
+            float gantesisr=mgbruto-gastos;
             String antes[] = new String[4];
             antes[0]="Ganancia antes de ISR         ";
-            antes[1]="";
+            antes[1]=String.valueOf(gantesisr);
             antes[2]="";
             antes[3]="";
             modelo.addRow(antes);
             String impuesto[] = new String[4];
             impuesto[0]="(-) Impuesto sobre la renta por pagar         ";
-            impuesto[1]="";
+            isrporpagar=(float) (gantesisr*0.005);
+            impuesto[1]=String.valueOf(isrporpagar);
             impuesto[2]="";
             impuesto[3]="";
             modelo.addRow(impuesto);
             
              String despues[] = new String[4];
+            gananciat=gantesisr-isrporpagar;
             despues[0]="Ganancia despues del impuesto sobre la renta";
-            despues[1]="";
+            despues[1]=String.valueOf(gananciat);
             despues[2]="";
             despues[3]="";
             modelo.addRow(despues);
@@ -165,9 +237,29 @@ public class resultados extends javax.swing.JFrame {
         }
         cuentas.setVisible(true);
         cuentas.getColumn("                          ").setPreferredWidth(200);
+        ganancianetaejercicio(String.valueOf(gananciat));
         
     }
+    public void ganancianetaejercicio(String gan){
+         try {
 
+             
+              
+                  PreparedStatement Actualizar = cn.prepareStatement("UPDATE cuentasbalance set saldo="+gan+" where nombre='"+"Ganancia neta del ejercicio"+"'");
+                   Actualizar.executeUpdate();
+                   Actualizar.close();
+                  // System.out.println("entre con "+a);
+               
+               
+                   
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

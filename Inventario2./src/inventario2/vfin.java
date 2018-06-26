@@ -39,6 +39,8 @@ Conexion con = new Conexion();
         jPanel1 = new javax.swing.JPanel();
         botonbalance = new javax.swing.JButton();
         botoner = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,7 +53,7 @@ Conexion con = new Conexion();
                 botonbalanceActionPerformed(evt);
             }
         });
-        jPanel1.add(botonbalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 210, -1));
+        jPanel1.add(botonbalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 210, -1));
 
         botoner.setText("Ver estado de resultados");
         botoner.addActionListener(new java.awt.event.ActionListener() {
@@ -59,7 +61,23 @@ Conexion con = new Conexion();
                 botonerActionPerformed(evt);
             }
         });
-        jPanel1.add(botoner, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        jPanel1.add(botoner, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, -1, -1));
+
+        jButton1.setText("datos balance");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+
+        jButton2.setText("Datos ER");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,6 +106,18 @@ Conexion con = new Conexion();
         er balance = new er();
         balance.setVisible(true);
     }//GEN-LAST:event_botonbalanceActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        datosbalance dbl = new datosbalance();
+        dbl.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        datoser err = new datoser();
+        err.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,6 +157,8 @@ Conexion con = new Conexion();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonbalance;
     private javax.swing.JButton botoner;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

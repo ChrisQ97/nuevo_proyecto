@@ -58,6 +58,11 @@ Conexion con = new Conexion();
             datos[3]="";
             modelo.addRow(datos);
             
+            float sumatoria=0;
+            float activo=0;
+            float pasivo=0;
+            float gananciadespuesisr=valorisr();
+            float capital=0;
                     
 
           try {
@@ -71,17 +76,38 @@ Conexion con = new Conexion();
                 datos[1] = Ca.getString(2);
                 datos[2] = "";
                 datos[3]="";
+                sumatoria+=Float.parseFloat(datos[1]);
+                if(datos[0].equals("Capital")){
+                   capital=activo-pasivo-gananciadespuesisr;
+                   datos[1]="";
+                    datos[2]=String.valueOf(capital);
+                }
+                if(datos[0].equals("Ganancia neta del ejercicio")){
+                   datos[2]=String.valueOf(gananciadespuesisr);
+                   datos[1]="";
+                  
+                }
+                
+                
                 
                 modelo.addRow(datos);
                 
-                if(datos[0].equals("Inversiones a corto plazo")){
+                if(datos[0].equals("Utiles y enseres")){
                     datos[0] = "           No corriente";
                     datos[1] = "";
                     datos[2] = "";
                     datos[3]="";
                     modelo.addRow(datos);
                 }
-                if(datos[0].equals("Inversiones a largo plazo")){
+                if(datos[0].equals("Gastos de instalación")){
+                    datos[0] = "Suma de activo";
+                    datos[2] = String.valueOf(sumatoria);
+                    activo=sumatoria;
+                    sumatoria=0;
+                    
+                    datos[1] = "";
+                    datos[3]="";
+                    modelo.addRow(datos);
                     datos[0] = "           Pasivo";
                     datos[1] = "";
                     datos[2] = "";
@@ -93,7 +119,7 @@ Conexion con = new Conexion();
                     datos[3]="";
                     modelo.addRow(datos);
                 }
-                if(datos[0].equals("Intereses percibidos no devengados")){
+                if(datos[0].equals("Hipotecas a corto plazo")){
                    
                     datos[0] = "           No Corriente";
                     datos[1] = "";
@@ -101,12 +127,28 @@ Conexion con = new Conexion();
                     datos[3]="";
                     modelo.addRow(datos);
                 }
-                if(datos[0].equals("Reserva para jubilaciones")){
+                if(datos[0].equals("Préstamos bancarios a largo plazo")){
                    
+                     datos[0] = "Suma del pasivo";
+                    datos[2] = String.valueOf(sumatoria);
+                    pasivo=sumatoria;
+                    sumatoria=0;
+                    datos[1] = "";
+                    datos[3]="";
+                    modelo.addRow(datos);
                     datos[0] = "           Patrimonio neto";
                     datos[1] = "";
                     datos[2] = "";
                     datos[3]="";
+                    modelo.addRow(datos);
+                }//Ganancia neta del ejercicio
+                
+                if(datos[0].equals("Ganancia neta del ejercicio")){
+                   
+                    datos[0] = "Suma del pasivo y patrimonio neto";
+                    datos[1] = "";
+                    datos[2] = "";
+                    datos[3]=String.valueOf(pasivo+gananciadespuesisr+capital);
                     modelo.addRow(datos);
                 }
                 
@@ -124,7 +166,21 @@ Conexion con = new Conexion();
             
             
     }
-
+    public float valorisr(){
+        float iss=0;
+    try {
+        Statement sx = Consulta.createStatement();
+        //cargo, total devengado+250,
+        ResultSet Ca = sx.executeQuery("SELECT saldo from cuentasbalance where nombre='"+"Ganancia neta del ejercicio"+"'");
+        while(Ca.next())
+            iss=Float.parseFloat(Ca.getString(1));
+    
+    } catch (SQLException ex) {
+        Logger.getLogger(er.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return iss;
+    
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -184,7 +240,7 @@ Conexion con = new Conexion();
         ));
         jScrollPane1.setViewportView(cuentas);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 770, 270));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 770, 320));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
