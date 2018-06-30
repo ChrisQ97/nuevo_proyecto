@@ -151,11 +151,6 @@ public class Menu extends javax.swing.JFrame {
         jPanel2.add(botonprov, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 80, -1));
 
         botonfinanzas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fin31.png"))); // NOI18N
-        botonfinanzas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonfinanzasActionPerformed(evt);
-            }
-        });
         jPanel2.add(botonfinanzas, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 80, 80));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 310));
@@ -182,7 +177,7 @@ System.exit(0);
 }
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Compras trd = new Compras();
+        SubCompras trd = new SubCompras();
         trd.setVisible(true); // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -192,7 +187,7 @@ System.exit(0);
     }//GEN-LAST:event_formWindowClosing
 
     private void botonventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonventaActionPerformed
-      Ventas x=new Ventas();
+      SubVentas x=new SubVentas();
       x.setVisible(true);
       dispose();// TODO add your handling code here:
     }//GEN-LAST:event_botonventaActionPerformed
@@ -211,15 +206,11 @@ System.exit(0);
 
     private void botonrhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonrhActionPerformed
         // TODO add your handling code here:
-       rh rhh = new rh();
-       rhh.setVisible(true);
+        
+        rh recursos = new rh();
+        recursos.setVisible(true);
+        
     }//GEN-LAST:event_botonrhActionPerformed
-
-    private void botonfinanzasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonfinanzasActionPerformed
-        // TODO add your handling code here:
-        vfin vff = new vfin();
-        vff.setVisible(true);
-    }//GEN-LAST:event_botonfinanzasActionPerformed
 
     /**
      * @param args the command line arguments

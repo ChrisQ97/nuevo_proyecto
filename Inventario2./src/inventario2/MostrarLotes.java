@@ -65,14 +65,14 @@ public class MostrarLotes extends javax.swing.JFrame {
           try {
 
             Statement sx = Consulta.createStatement();
-            ResultSet Ca = sx.executeQuery("SELECT L.NoLote,L.Fecha,L.Cantidad,L.CostoUnitario,L.CostoTotal,L.Descripcion,L.PrecioUnitario,L.PrecioTotal,V.Nombre,L.Ganancia FROM Producto P \n" +
+            ResultSet Ca = sx.executeQuery("SELECT L.NoLote, L.Fecha,L.Cantidad,L.CostoUnitario,L.CostoTotal,L.Descripcion,L.PrecioUnitario,L.PrecioTotal,V.Nombre,L.Ganancia FROM Producto P \n" +
 "inner JOIN Lote L \n" +
 "on P.id=L.Producto_id \n" +
-"inner JOIN Compra C\n" +
-"on C.Lote_id=L.id\n" +
-"inner JOIN Proveedor V\n" +
-"on V.id=C.Proveedor_id\n" +
-"WHERE P.Marca= '"+Marca+"'&& L.Disponible=true &&P.Nombre='"+Nombre+"';");
+"inner JOIN FacturaCompra F\n" +
+"on L.FacturaCompra_id=F.id\n" +
+"inner JOIN Proveedor V \n" +
+"on V.id=F.Proveedor_id\n" +
+"WHERE P.Marca= '"+Marca+"'&& L.Disponible=true &&P.Nombre='"+Nombre+"' ORDER BY L.Fecha;");
           
             while (Ca.next()) {
                

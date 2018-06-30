@@ -8,12 +8,27 @@ package inventario2;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.Connection;
+import java.sql.Date;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
@@ -22,15 +37,33 @@ import javax.swing.table.DefaultTableModel;
 public class Registro extends javax.swing.JFrame {
 
     Conexion con = new Conexion();
-   
+   DefaultTableModel modeloBusqueda = new DefaultTableModel() {
+                public boolean isCellEditable(int rowIndex, int columnIndex) {
+                    return false;
+                }
+            };
     Connection Consulta = con.conexion();
+    private int año=0;
+    private int dia=0;
+    private int mes=0;
+    private int dia2=0;
+    private int año2=0;
+    private int mes2=0;
     /**
      * Creates new form Registro
      */
     public Registro() {
         initComponents();
                 
-
+        P.setVisible(false);
+        P2.setVisible(false);
+        Buscador.setVisible(false);
+        Inicio.setVisible(false);
+        Final.setVisible(false);
+        Inicio2.setVisible(false);
+        Final2.setVisible(false);
+        Regre.setVisible(false);
+        AutoCompleteDecorator.decorate(Buscador);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();    
         this.setSize(dim);
         this.setLocation(dim.width/4-this.getSize().width/4, dim.height/10-this.getSize().height/10);
@@ -42,11 +75,7 @@ public class Registro extends javax.swing.JFrame {
        
       
           
-            DefaultTableModel modeloBusqueda = new DefaultTableModel() {
-                public boolean isCellEditable(int rowIndex, int columnIndex) {
-                    return false;
-                }
-            };
+            
             modeloBusqueda.addColumn("Codigo");
             
             modeloBusqueda.addColumn("Producto");
@@ -54,12 +83,13 @@ public class Registro extends javax.swing.JFrame {
             modeloBusqueda.addColumn("Proveedor");
             modeloBusqueda.addColumn("Fecha Compra");
             modeloBusqueda.addColumn("Cantidad");
+            modeloBusqueda.addColumn("Unidad");
             modeloBusqueda.addColumn("Costo Unitario");
             modeloBusqueda.addColumn("Costo Total");
             modeloBusqueda.addColumn("Descripcion");
             modeloBusqueda.addColumn("Precio Unitario");
             modeloBusqueda.addColumn("Precio Total");
-            modeloBusqueda.addColumn("Iva Compra");
+            
             
             Lote.setModel(modeloBusqueda);
 
@@ -68,8 +98,15 @@ public class Registro extends javax.swing.JFrame {
           try {
 
             Statement sx = Consulta.createStatement();
-            ResultSet Ca = sx.executeQuery("SELECT P.Codigo,P.Nombre, P.Marca,V.Nombre, L.Fecha, L.Cantidad, L.CostoUnitario,L.CostoTotal,L.Descripcion,L.PrecioUnitario,L.PrecioTotal,L.IvaCompra FROM Producto P inner JOIN Registro_Compras L on P.id=L.Producto_id inner JOIN Compra2 C on C.Registro_Compras_id=L.id inner JOIN Proveedor V on V.id=C.Proveedor_id");
-          
+            ResultSet Ca = sx.executeQuery("SELECT P.Codigo,P.Nombre, P.Marca,V.NombreV, L.Fecha, L.Cantidad, P.Medida,\n" +
+"L.CostoUnitario,L.CostoTotal,L.Descripcion,L.PrecioUnitario,L.PrecioTotal\n" +
+"FROM Producto P \n" +
+"inner JOIN Registro_Compras L \n" +
+"on P.id=L.Producto_id \n" +
+"inner JOIN FacturaCompra C \n" +
+"on C.id=L.FacturaCompra_id\n" +
+"inner JOIN Proveedor V \n" +
+"on V.id=C.Proveedor_id");          
             while (Ca.next()) {
                
                 datos[0] = Ca.getString(1);
@@ -106,8 +143,19 @@ public class Registro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         Lote = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        P = new javax.swing.JRadioButton();
+        P2 = new javax.swing.JRadioButton();
+        Inicio = new com.toedter.calendar.JDateChooser();
+        Final = new com.toedter.calendar.JDateChooser();
+        Inicio2 = new javax.swing.JLabel();
+        Final2 = new javax.swing.JLabel();
+        Buscador = new javax.swing.JComboBox<>();
+        Regre = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,25 +177,112 @@ public class Registro extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(Lote);
 
+        jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        P.setText("Proveedor");
+        P.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PActionPerformed(evt);
+            }
+        });
+
+        P2.setText("Producto");
+        P2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                P2ActionPerformed(evt);
+            }
+        });
+
+        Inicio2.setText("Inicio");
+
+        Final2.setText("Final");
+
+        Buscador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscadorActionPerformed(evt);
+            }
+        });
+
+        Regre.setText("Todo");
+        Regre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegreActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Generar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 966, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Inicio2))
+                    .addComponent(Regre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(Final2)
+                .addGap(18, 18, 18)
+                .addComponent(Final, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(P)
+                        .addGap(33, 33, 33)
+                        .addComponent(P2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2))
+                    .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(P)
+                            .addComponent(P2)
+                            .addComponent(jButton2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Buscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Final, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Inicio2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(Final2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Regre)))
+                        .addGap(21, 21, 21)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -157,6 +292,298 @@ public class Registro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_LoteMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        P.setVisible(true);
+        P2.setVisible(true);
+        Buscador.setVisible(true);
+        Inicio.setVisible(true);
+        Final.setVisible(true);
+        Inicio2.setVisible(true);
+        Final2.setVisible(true);
+        Regre.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PActionPerformed
+        try
+        {
+        año = Inicio.getCalendar().get(Calendar.YEAR);
+         mes = Inicio.getCalendar().get(Calendar.MONTH) + 1;
+         dia = Inicio.getCalendar().get(Calendar.DAY_OF_MONTH);
+         año2 = Final.getCalendar().get(Calendar.YEAR);
+         mes2= Final.getCalendar().get(Calendar.MONTH) + 1;
+         dia2 = Final.getCalendar().get(Calendar.DAY_OF_MONTH);
+    }                                        
+
+    
+    catch(NullPointerException ex) {
+        P.setSelected(false);
+    }
+         if(año==0||dia==0||mes==00||año2==0||dia2==0||mes2==00)   
+    {
+        JOptionPane.showMessageDialog(this, "Al menos selecciona una fecha válida!", "Error!", JOptionPane.INFORMATION_MESSAGE);
+    }
+         else{
+        Buscador.removeAllItems();
+        P2.setSelected(false);
+        try {
+
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT Nit FROM Proveedor");
+            while (Ca.next()) {
+
+                Buscador.addItem(Ca.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Compras.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         }
+    }//GEN-LAST:event_PActionPerformed
+
+    private void P2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P2ActionPerformed
+        try
+        {
+        año = Inicio.getCalendar().get(Calendar.YEAR);
+         mes = Inicio.getCalendar().get(Calendar.MONTH) + 1;
+         dia = Inicio.getCalendar().get(Calendar.DAY_OF_MONTH);
+         año2 = Final.getCalendar().get(Calendar.YEAR);
+         mes2= Final.getCalendar().get(Calendar.MONTH) + 1;
+         dia2 = Final.getCalendar().get(Calendar.DAY_OF_MONTH);
+    }                                        
+
+    
+    catch(NullPointerException ex) {
+        P2.setSelected(false);
+    }
+         if(año==0||dia==0||mes==00||año2==0||dia2==0||mes2==00)   
+    {
+        JOptionPane.showMessageDialog(this, "Al menos selecciona una fecha válida!", "Error!", JOptionPane.INFORMATION_MESSAGE);
+    }
+         else{
+        Buscador.removeAllItems();
+        P.setSelected(false);
+        try {
+
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT Codigo FROM Producto");
+            while (Ca.next()) {
+
+                Buscador.addItem(Ca.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Compras.class.getName()).log(Level.SEVERE, null, ex);
+        
+        }}    }//GEN-LAST:event_P2ActionPerformed
+
+    private void BuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscadorActionPerformed
+      try
+        {
+        año = Inicio.getCalendar().get(Calendar.YEAR);
+         mes = Inicio.getCalendar().get(Calendar.MONTH) + 1;
+         dia = Inicio.getCalendar().get(Calendar.DAY_OF_MONTH);
+         año2 = Final.getCalendar().get(Calendar.YEAR);
+         mes2= Final.getCalendar().get(Calendar.MONTH) + 1;
+         dia2 = Final.getCalendar().get(Calendar.DAY_OF_MONTH);
+    }                                        
+
+    
+    catch(NullPointerException ex) {
+    }
+      if(año==0||dia==0||mes==00||año2==0||dia2==0||mes2==00)   
+    {
+        JOptionPane.showMessageDialog(this, "Al menos selecciona una fecha válida!", "Error!", JOptionPane.INFORMATION_MESSAGE);
+    }
+    else
+      {
+        
+        String Completo = (String) Buscador.getSelectedItem();
+        if(P.isSelected())
+        {
+            Llenar(Completo);
+        }
+        if(P2.isSelected())
+        {
+            llenar2(Completo);
+        }
+      }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscadorActionPerformed
+
+    private void RegreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegreActionPerformed
+                  modeloBusqueda.setRowCount(0);
+
+        P.setVisible(false);
+        P2.setVisible(false);
+        Buscador.setVisible(false);
+        Inicio.setVisible(false);
+        Final.setVisible(false);
+        Inicio2.setVisible(false);
+        Final2.setVisible(false);
+        Regre.setVisible(false);
+
+            String datos[] = new String[12];
+
+          try {
+
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT P.Codigo,P.Nombre, P.Marca,V.NombreV, L.Fecha, L.Cantidad, P.Medida,\n" +
+"L.CostoUnitario,L.CostoTotal,L.Descripcion,L.PrecioUnitario,L.PrecioTotal\n" +
+"FROM Producto P \n" +
+"inner JOIN Registro_Compras L \n" +
+"on P.id=L.Producto_id \n" +
+"inner JOIN FacturaCompra C \n" +
+"on C.id=L.FacturaCompra_id\n" +
+"inner JOIN Proveedor V \n" +
+"on V.id=C.Proveedor_id");          
+            while (Ca.next()) {
+               
+                datos[0] = Ca.getString(1);
+                datos[1] = Ca.getString(2);
+                datos[2] = Ca.getString(3);
+                datos[3] = Ca.getString(4);
+                datos[4] = Ca.getString(5);
+                datos[5] = Ca.getString(6);
+                datos[6] = Ca.getString(7);
+                datos[7] = Ca.getString(8);
+                datos[8] = Ca.getString(9);
+                datos[9] = Ca.getString(10);
+                datos[10] = Ca.getString(11);
+                datos[11] = Ca.getString(12);
+               
+                modeloBusqueda.addRow(datos);
+                
+            }
+            Lote.setModel(modeloBusqueda);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Lote.setVisible(true);
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RegreActionPerformed
+
+    private void InformeProducto(String cod)
+    {
+                try {
+                    
+                  
+            
+            Date uno=new Date(año-1900,mes-1,dia);
+            Date dos=new Date(año2-1900,mes2-1,dia2);
+                    System.out.println(uno+" y "+dos+" ; "+cod);
+            Connection tr = con.conexion();
+            JasperReport reporte= null;
+            String path="/home/sys515/Documentos/Git/Inventario2/Inventario2-master/Inventario2./src/Reportes/ventasProd.jasper";
+            
+            Map parametro =new HashMap();
+            parametro.put("Fecha2",dos );
+            parametro.put("Fecha1", uno);
+            parametro.put("Codigo",cod);
+            reporte= (JasperReport) JRLoader.loadObjectFromFile(path);
+            JasperPrint jprint =JasperFillManager.fillReport(reporte,parametro,tr);
+            JasperViewer view = new JasperViewer(jprint,false);
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+
+            // TODO add your handling code here:
+        } catch (JRException ex) {
+            Logger.getLogger(Clientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if(P2.isSelected())
+        {
+            InformeProducto((String)Buscador.getSelectedItem());
+        }
+        if(P.isSelected())
+        {
+            InformeProducto((String)Buscador.getSelectedItem());
+        }
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+    private void llenar2(String B)
+    {
+          modeloBusqueda.setRowCount(0);
+        String datos[]=new String[12];
+         try {
+
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT P.Codigo,P.Nombre, P.Marca,V.NombreV, L.Fecha, L.Cantidad,P.Medida, \n" +
+"L.CostoUnitario,L.CostoTotal,L.Descripcion,L.PrecioUnitario,L.PrecioTotal\n" +
+"FROM Producto P \n" +
+"inner JOIN Registro_Compras L \n" +
+"on P.id=L.Producto_id \n" +
+"inner JOIN FacturaCompra C \n" +
+"on C.id=L.FacturaCompra_id\n" +
+"inner JOIN Proveedor V \n" +
+"on V.id=C.Proveedor_id where P.Codigo='"+B+"'&& L.Fecha BETWEEN '"+año+"-"+mes+"-"+dia+"' AND '"+año2+"-"+mes2+"-"+dia2+"'");          
+            while (Ca.next()) {
+               
+                datos[0] = Ca.getString(1);
+                datos[1] = Ca.getString(2);
+                datos[2] = Ca.getString(3);
+                datos[3] = Ca.getString(4);
+                datos[4] = Ca.getString(5);
+                datos[5] = Ca.getString(6);
+                datos[6] = Ca.getString(7);
+                datos[7] = Ca.getString(8);
+                datos[8] = Ca.getString(9);
+                datos[9] = Ca.getString(10);
+                datos[10] = Ca.getString(11);
+                datos[11] = Ca.getString(12);
+               
+                modeloBusqueda.addRow(datos);
+                
+            }
+            Lote.setModel(modeloBusqueda);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private void Llenar(String B)
+    {
+        modeloBusqueda.setRowCount(0);
+        String datos[]=new String[12];
+         try {
+
+            Statement sx = Consulta.createStatement();
+            ResultSet Ca = sx.executeQuery("SELECT P.Codigo,P.Nombre, P.Marca,V.NombreV, L.Fecha, L.Cantidad,P.Medida, \n" +
+"L.CostoUnitario,L.CostoTotal,L.Descripcion,L.PrecioUnitario,L.PrecioTotal\n" +
+"FROM Producto P \n" +
+"inner JOIN Registro_Compras L \n" +
+"on P.id=L.Producto_id \n" +
+"inner JOIN FacturaCompra C \n" +
+"on C.id=L.FacturaCompra_id\n" +
+"inner JOIN Proveedor V \n" +
+"on V.id=C.Proveedor_id where V.Nit='"+B+"'&& L.Fecha BETWEEN '"+año+"-"+mes+"-"+dia+"' AND '"+año2+"-"+mes2+"-"+dia2+"'");          
+            while (Ca.next()) {
+               
+                datos[0] = Ca.getString(1);
+                datos[1] = Ca.getString(2);
+                datos[2] = Ca.getString(3);
+                datos[3] = Ca.getString(4);
+                datos[4] = Ca.getString(5);
+                datos[5] = Ca.getString(6);
+                datos[6] = Ca.getString(7);
+                datos[7] = Ca.getString(8);
+                datos[8] = Ca.getString(9);
+                datos[9] = Ca.getString(10);
+                datos[10] = Ca.getString(11);
+                datos[11] = Ca.getString(12);
+               
+                modeloBusqueda.addRow(datos);
+                
+            }
+            Lote.setModel(modeloBusqueda);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -193,7 +620,18 @@ public class Registro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> Buscador;
+    private com.toedter.calendar.JDateChooser Final;
+    private javax.swing.JLabel Final2;
+    private com.toedter.calendar.JDateChooser Inicio;
+    private javax.swing.JLabel Inicio2;
     private javax.swing.JTable Lote;
+    private javax.swing.JRadioButton P;
+    private javax.swing.JRadioButton P2;
+    private javax.swing.JButton Regre;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
