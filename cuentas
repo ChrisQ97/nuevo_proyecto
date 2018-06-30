@@ -1,7 +1,0 @@
-INSERT INTO cuentasbalance(nombre, saldo)
-values("Caja", 0),("Caja chica",0),("Bancos",0),
-("Clientes",0),
-
-
-
-
