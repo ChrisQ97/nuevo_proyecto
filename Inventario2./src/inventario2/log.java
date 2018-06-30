@@ -53,43 +53,53 @@ Conexion con = new Conexion();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(189, 189, 189));
+        jPanel1.setBackground(new java.awt.Color(17, 111, 172));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarioa30.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 150, 150));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-administrador-del-hombre-filled-100blanco.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 100, 130));
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Usuario");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Clave");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usuarioActionPerformed(evt);
             }
         });
-        jPanel1.add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 140, -1));
-        jPanel1.add(clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, 140, -1));
+        jPanel1.add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 140, -1));
+        jPanel1.add(clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 140, -1));
 
-        ingresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/i30.png"))); // NOI18N
+        ingresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-entrar-50.png"))); // NOI18N
+        ingresar.setBorderPainted(false);
+        ingresar.setContentAreaFilled(false);
+        ingresar.setDefaultCapable(false);
+        ingresar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-entrar-filled-50.png"))); // NOI18N
         ingresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ingresarActionPerformed(evt);
             }
         });
-        jPanel1.add(ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 80, 70));
+        jPanel1.add(ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 80, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();

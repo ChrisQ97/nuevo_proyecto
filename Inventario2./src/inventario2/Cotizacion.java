@@ -136,7 +136,6 @@ public class Cotizacion extends javax.swing.JFrame {
         NombreP = new javax.swing.JLabel();
         Marca = new javax.swing.JLabel();
         Existencia = new javax.swing.JLabel();
-        addfila = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         NombreM = new javax.swing.JLabel();
@@ -150,6 +149,8 @@ public class Cotizacion extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         Cantidad = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        addfila = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -174,9 +175,11 @@ public class Cotizacion extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 560, 270));
 
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Codigo");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Producto");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 29, -1, -1));
 
@@ -187,50 +190,55 @@ public class Cotizacion extends javax.swing.JFrame {
         });
         getContentPane().add(Producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 52, 121, -1));
 
+        NombrePM.setForeground(new java.awt.Color(255, 255, 255));
         NombrePM.setText("Nombre");
         getContentPane().add(NombrePM, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 104, -1, -1));
 
+        MarcaM.setForeground(new java.awt.Color(255, 255, 255));
         MarcaM.setText("Marca");
         getContentPane().add(MarcaM, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 139, 55, -1));
 
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Existencia");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 174, -1, -1));
 
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Cantidad");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 227, -1, -1));
 
+        NombreP.setForeground(new java.awt.Color(255, 255, 255));
         NombreP.setText("Nombre");
         getContentPane().add(NombreP, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 104, -1, -1));
 
+        Marca.setForeground(new java.awt.Color(255, 255, 255));
         Marca.setText("Marca");
         getContentPane().add(Marca, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 139, -1, -1));
 
+        Existencia.setForeground(new java.awt.Color(255, 255, 255));
         Existencia.setText("Existencia");
         getContentPane().add(Existencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 174, -1, -1));
 
-        addfila.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/masa10.png"))); // NOI18N
-        addfila.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addfilaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(addfila, new org.netbeans.lib.awtextra.AbsoluteConstraints(199, 219, 30, 30));
-
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Cliente");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, -1, -1));
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Nit");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
 
+        NombreM.setForeground(new java.awt.Color(255, 255, 255));
         NombreM.setText("Nombre");
         getContentPane().add(NombreM, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, -1, -1));
 
+        N.setForeground(new java.awt.Color(255, 255, 255));
         N.setText("Nombre");
         getContentPane().add(N, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, -1, -1));
 
+        ApellidoM.setForeground(new java.awt.Color(255, 255, 255));
         ApellidoM.setText("Apellido");
         getContentPane().add(ApellidoM, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
 
+        NY.setForeground(new java.awt.Color(255, 255, 255));
         NY.setText("Apellido");
         getContentPane().add(NY, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, -1, -1));
 
@@ -265,9 +273,11 @@ public class Cotizacion extends javax.swing.JFrame {
         });
         getContentPane().add(Nit, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 146, -1));
 
+        Totales.setForeground(new java.awt.Color(255, 255, 255));
         Totales.setText("0000");
         getContentPane().add(Totales, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, -1, -1));
 
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Total");
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, -1, -1));
 
@@ -285,6 +295,21 @@ public class Cotizacion extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(311, 453, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(17, 111, 172));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        addfila.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-más-2-matemáticas-50.png"))); // NOI18N
+        addfila.setContentAreaFilled(false);
+        addfila.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-más-2-matemáticas-filled-50.png"))); // NOI18N
+        addfila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addfilaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(addfila, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 50, 50));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 560));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -749,6 +774,7 @@ public class Cotizacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

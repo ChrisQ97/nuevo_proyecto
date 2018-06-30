@@ -57,39 +57,47 @@ public class pl extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(189, 189, 189));
+        jPanel1.setBackground(new java.awt.Color(17, 111, 172));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         planilla.setBackground(new java.awt.Color(189, 189, 189));
-        planilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/plani28.png"))); // NOI18N
+        planilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-multiedición-100.png"))); // NOI18N
         planilla.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 102), 1, true));
+        planilla.setContentAreaFilled(false);
+        planilla.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-multiedición-filled-100.png"))); // NOI18N
         planilla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 planillaActionPerformed(evt);
             }
         });
-        jPanel1.add(planilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 100, -1));
+        jPanel1.add(planilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 100, -1));
 
         mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
-        jPanel1.add(mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 110, -1));
+        jPanel1.add(mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 110, -1));
 
         anio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
-        jPanel1.add(anio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 110, -1));
+        jPanel1.add(anio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 110, -1));
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Crear planilla");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Visualizar planillas");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, -1, -1));
 
         ver.setBackground(new java.awt.Color(189, 189, 189));
-        ver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ver45.png"))); // NOI18N
+        ver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-historial-de-pedidos-100.png"))); // NOI18N
+        ver.setContentAreaFilled(false);
+        ver.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-historial-de-pedidos-filled-100.png"))); // NOI18N
         ver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 verActionPerformed(evt);
             }
         });
-        jPanel1.add(ver, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 100, -1));
+        jPanel1.add(ver, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 100, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,9 +109,7 @@ public class pl extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

@@ -49,7 +49,7 @@ public class Compras extends javax.swing.JFrame {
     public Compras() {
         initComponents();
 
-        this.setSize(1265, 740);
+        this.setSize(1265, 720);
         AutoCompleteDecorator.decorate(Otro);
         AutoCompleteDecorator.decorate(Otro1);
         this.setResizable(false);
@@ -285,19 +285,23 @@ public class Compras extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(189, 189, 189));
+        jPanel1.setBackground(new java.awt.Color(17, 111, 172));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPaneldedatos.setBackground(new java.awt.Color(31, 115, 170));
         jPaneldedatos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPaneldedatos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Información de Facturación");
         jPaneldedatos.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
 
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Serie");
         jPaneldedatos.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
         jPaneldedatos.add(Serie, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 73, -1));
 
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Numero");
         jPaneldedatos.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, -1, -1));
 
@@ -313,18 +317,23 @@ public class Compras extends javax.swing.JFrame {
         });
         jPaneldedatos.add(Numero, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 67, -1));
 
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Nombre");
         jPaneldedatos.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 159, -1, -1));
 
+        Nombre2.setForeground(new java.awt.Color(255, 255, 255));
         Nombre2.setText("jLabel9");
         jPaneldedatos.add(Nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 113, -1));
 
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Representante");
         jPaneldedatos.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 182, -1, -1));
 
+        Apellido.setForeground(new java.awt.Color(255, 255, 255));
         Apellido.setText("jLabel14");
         jPaneldedatos.add(Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 113, -1));
 
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Nit Proveedor");
         jPaneldedatos.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 211, -1, -1));
 
@@ -336,10 +345,11 @@ public class Compras extends javax.swing.JFrame {
         jPaneldedatos.add(Otro1, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 234, 143, -1));
 
         jLabel17.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Agregar proveedor");
         jPaneldedatos.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, -1, -1));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-agregar-administrador-80.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-agregar-administrador-50.png"))); // NOI18N
         jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
         jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-agregar-administrador-filled-50.png"))); // NOI18N
@@ -362,12 +372,15 @@ public class Compras extends javax.swing.JFrame {
         jPaneldedatos.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, 50, 50));
 
         jLabel18.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Actualizar");
         jPaneldedatos.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, -1, -1));
 
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("Proveedor");
         jPaneldedatos.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 130, -1, -1));
 
+        Fecha.setForeground(new java.awt.Color(255, 255, 255));
         Fecha.setText("Fecha");
         jPaneldedatos.add(Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, -1, -1));
         jPaneldedatos.add(Fech, new org.netbeans.lib.awtextra.AbsoluteConstraints(239, 70, 160, 40));
@@ -389,9 +402,11 @@ public class Compras extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(3499, 37, -1, -1));
 
+        panel3.setBackground(new java.awt.Color(31, 115, 170));
         panel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Producto");
         panel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 20, 84, -1));
 
@@ -402,9 +417,11 @@ public class Compras extends javax.swing.JFrame {
         });
         panel3.add(Otro, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 12, 301, -1));
 
+        Nombre.setForeground(new java.awt.Color(255, 255, 255));
         Nombre.setText("Nombre");
         panel3.add(Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 118, -1));
 
+        Marca.setForeground(new java.awt.Color(255, 255, 255));
         Marca.setText("Marca");
         panel3.add(Marca, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 107, -1));
 
@@ -420,23 +437,29 @@ public class Compras extends javax.swing.JFrame {
         });
         panel3.add(Cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 81, -1));
 
-        addfila.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/masa10.png"))); // NOI18N
+        addfila.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-más-2-matemáticas-50.png"))); // NOI18N
+        addfila.setContentAreaFilled(false);
+        addfila.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-más-2-matemáticas-filled-50.png"))); // NOI18N
         addfila.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addfilaActionPerformed(evt);
             }
         });
-        panel3.add(addfila, new org.netbeans.lib.awtextra.AbsoluteConstraints(394, 272, 30, 30));
+        panel3.add(addfila, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, 60, 50));
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Cantidad");
         panel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 136, -1, -1));
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("CostoUnitario");
         panel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 174, -1, -1));
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Descripcion");
         panel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 207, -1, -1));
 
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Porcentaje de ganancia");
         panel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, -1, -1));
 
@@ -447,12 +470,15 @@ public class Compras extends javax.swing.JFrame {
         });
         panel3.add(Descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 242, 346, 60));
 
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("%");
         panel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 170, 30, 30));
 
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Nombre:");
         panel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Apellido:");
         panel3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 89, -1, -1));
 
@@ -475,22 +501,27 @@ public class Compras extends javax.swing.JFrame {
         });
         panel3.add(Ganancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, 51, -1));
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Unidad");
         panel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, -1, -1));
 
+        Unidad.setForeground(new java.awt.Color(255, 255, 255));
         Unidad.setText("Unidad");
         panel3.add(Unidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, -1, -1));
 
         jPanel1.add(panel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, 570, 320));
 
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Cantidad Total");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 640, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Regresar");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 590, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Comprar");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 450, -1, -1));
 
@@ -516,12 +547,15 @@ public class Compras extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 380, 80, 68));
 
+        Totales.setForeground(new java.awt.Color(255, 255, 255));
         Totales.setText("0.0");
         jPanel1.add(Totales, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 640, 92, -1));
 
+        TotalCantidad.setForeground(new java.awt.Color(255, 255, 255));
         TotalCantidad.setText("0");
         jPanel1.add(TotalCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 640, 89, -1));
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Total");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 640, -1, -1));
 
@@ -536,6 +570,7 @@ public class Compras extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        Factura.setColorBackgoundHead(new java.awt.Color(0, 141, 232));
         Factura.setColorSelBackgound(new java.awt.Color(10, 221, 254));
         Factura.setFuenteHead(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jScrollPane3.setViewportView(Factura);
@@ -568,8 +603,8 @@ public class Compras extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 

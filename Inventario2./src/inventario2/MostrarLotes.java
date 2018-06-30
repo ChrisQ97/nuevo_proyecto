@@ -119,18 +119,22 @@ public class MostrarLotes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(189, 189, 189));
+        jPanel1.setBackground(new java.awt.Color(17, 111, 172));
 
         Nombre.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        Nombre.setForeground(new java.awt.Color(255, 255, 255));
         Nombre.setText("Nombre");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Producto");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Marca");
 
         Marca.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        Marca.setForeground(new java.awt.Color(255, 255, 255));
         Marca.setText("jLabel4");
 
         Lote.setModel(new javax.swing.table.DefaultTableModel(

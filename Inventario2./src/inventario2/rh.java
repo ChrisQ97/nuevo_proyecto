@@ -96,18 +96,20 @@ public class rh extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(189, 189, 189));
+        jPanel1.setBackground(new java.awt.Color(17, 111, 172));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         addemple.setBackground(new java.awt.Color(189, 189, 189));
-        addemple.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/image.png"))); // NOI18N
+        addemple.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-agregar-administrador-100.png"))); // NOI18N
         addemple.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 102), 1, true));
+        addemple.setContentAreaFilled(false);
+        addemple.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-agregar-administrador-filled-100.png"))); // NOI18N
         addemple.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addempleActionPerformed(evt);
             }
         });
-        jPanel1.add(addemple, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 90));
+        jPanel1.add(addemple, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 100));
 
         emple.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,56 +124,70 @@ public class rh extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(emple);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 730, 290));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 730, 290));
 
-        regresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/regresara7.png"))); // NOI18N
+        regresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-volver-asignación-50.png"))); // NOI18N
+        regresar.setContentAreaFilled(false);
+        regresar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-volver-asignación-filled-50.png"))); // NOI18N
         regresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 regresarActionPerformed(evt);
             }
         });
-        jPanel1.add(regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 340, 50, -1));
+        jPanel1.add(regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 340, 50, -1));
 
         planilla.setBackground(new java.awt.Color(189, 189, 189));
-        planilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/plani28.png"))); // NOI18N
+        planilla.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-nómina-100.png"))); // NOI18N
         planilla.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 102), 1, true));
+        planilla.setContentAreaFilled(false);
+        planilla.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-nómina-filled-100.png"))); // NOI18N
         planilla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 planillaActionPerformed(evt);
             }
         });
-        jPanel1.add(planilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 100, -1));
+        jPanel1.add(planilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 110, 100));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/actualizara17.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-actualizar-50.png"))); // NOI18N
+        jButton1.setContentAreaFilled(false);
+        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-actualizar-filled-50.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, 40, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 340, 40, -1));
 
-        prestamo.setText("prestamo");
+        prestamo.setForeground(new java.awt.Color(255, 255, 255));
+        prestamo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-efectivo-en-mano-50.png"))); // NOI18N
+        prestamo.setText("Prestamo");
+        prestamo.setContentAreaFilled(false);
+        prestamo.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-efectivo-en-mano-filled-50.png"))); // NOI18N
         prestamo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 prestamoActionPerformed(evt);
             }
         });
-        jPanel1.add(prestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, -1, -1));
+        jPanel1.add(prestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, -1));
 
         jButton2.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-ver-archivo-50.png"))); // NOI18N
         jButton2.setText("Ver prestamos");
+        jButton2.setContentAreaFilled(false);
+        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-ver-archivo-filled-50.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 130, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 180, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 867, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 895, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

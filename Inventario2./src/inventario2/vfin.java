@@ -25,6 +25,10 @@ Conexion con = new Conexion();
         this.setDefaultCloseOperation(this.HIDE_ON_CLOSE); 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();    
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        jButton2.setText("<html>Datos Estado</br> de Resultados</html>"); 
+        jButton1.setText("<html>Datos Balance</br> General</html>"); 
+        botoner.setText("<html>Estado de</br> Resultados</html>"); 
+        botonbalance.setText("<html>Balance</br> General          </html>"); 
     }
 
     /**
@@ -44,50 +48,72 @@ Conexion con = new Conexion();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(189, 189, 189));
+        jPanel1.setBackground(new java.awt.Color(17, 111, 172));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        botonbalance.setText("Ver balance");
+        botonbalance.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        botonbalance.setForeground(new java.awt.Color(255, 255, 255));
+        botonbalance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-documento-100.png"))); // NOI18N
+        botonbalance.setText("Ver balance ");
+        botonbalance.setContentAreaFilled(false);
+        botonbalance.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-documento-filled-100.png"))); // NOI18N
         botonbalance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonbalanceActionPerformed(evt);
             }
         });
-        jPanel1.add(botonbalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 210, -1));
+        jPanel1.add(botonbalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 310, 100));
 
+        botoner.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        botoner.setForeground(new java.awt.Color(255, 255, 255));
+        botoner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-documento-100.png"))); // NOI18N
         botoner.setText("Ver estado de resultados");
+        botoner.setContentAreaFilled(false);
+        botoner.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-documento-filled-100.png"))); // NOI18N
         botoner.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonerActionPerformed(evt);
             }
         });
-        jPanel1.add(botoner, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, -1, -1));
+        jPanel1.add(botoner, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 310, -1));
 
-        jButton1.setText("datos balance");
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-ver-detalles-100.png"))); // NOI18N
+        jButton1.setText("Datos Balance General");
+        jButton1.setContentAreaFilled(false);
+        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-ver-detalles-filled-100.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 290, 100));
 
-        jButton2.setText("Datos ER");
+        jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-ver-detalles-100.png"))); // NOI18N
+        jButton2.setText("Datos estado de resultados");
+        jButton2.setContentAreaFilled(false);
+        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-ver-detalles-filled-100.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 290, 110));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();

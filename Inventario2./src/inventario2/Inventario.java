@@ -72,7 +72,7 @@ DefaultTableModel modeloBusqueda = new DefaultTableModel() {
         this.setResizable(false);
 //pruebas
         //this.setUndecorated(true);
-        this.setSize(1140,700);
+        this.setSize(1060,605);
         
         //this.setDefaultCloseOperation(this.HIDE_ON_CLOSE);
         //
@@ -182,7 +182,7 @@ DefaultTableModel modeloBusqueda = new DefaultTableModel() {
             }
         });
 
-        Panel.setBackground(new java.awt.Color(189, 189, 189));
+        Panel.setBackground(new java.awt.Color(17, 111, 172));
         Panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Act.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-actualizar-50.png"))); // NOI18N
@@ -194,7 +194,7 @@ DefaultTableModel modeloBusqueda = new DefaultTableModel() {
                 ActActionPerformed(evt);
             }
         });
-        Panel.add(Act, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 560, 40, 42));
+        Panel.add(Act, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 510, 40, 42));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-producto-50.png"))); // NOI18N
         jButton1.setContentAreaFilled(false);
@@ -205,7 +205,7 @@ DefaultTableModel modeloBusqueda = new DefaultTableModel() {
                 jButton1ActionPerformed(evt);
             }
         });
-        Panel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 550, 51, 50));
+        Panel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 510, 51, 50));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-volver-asignación-50.png"))); // NOI18N
         jButton2.setBorderPainted(false);
@@ -216,25 +216,29 @@ DefaultTableModel modeloBusqueda = new DefaultTableModel() {
                 jButton2ActionPerformed(evt);
             }
         });
-        Panel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 540, 49, -1));
+        Panel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 500, 49, -1));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("INVENTARIO");
         Panel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 200, 44));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Agregar producto");
-        Panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 510, -1, -1));
+        Panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Regresar");
-        Panel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 510, -1, -1));
+        Panel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 480, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Generar Reporte");
-        Panel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, -1, -1));
+        Panel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 80, -1, -1));
 
         Inventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -247,43 +251,52 @@ DefaultTableModel modeloBusqueda = new DefaultTableModel() {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        Inventario.setColorBackgoundHead(new java.awt.Color(85, 1, 156));
+        Inventario.setColorBackgoundHead(new java.awt.Color(0, 141, 232));
         Inventario.setComponentPopupMenu(Menu);
+        Inventario.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        Inventario.setFuenteFilas(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Inventario.setFuenteFilasSelect(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Inventario.setFuenteHead(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jScrollPane2.setViewportView(Inventario);
 
-        Panel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 1010, 320));
+        Panel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 1030, 320));
 
+        P2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        P2.setForeground(new java.awt.Color(255, 255, 255));
         P2.setText("Producto");
         P2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 P2ActionPerformed(evt);
             }
         });
-        Panel.add(P2, new org.netbeans.lib.awtextra.AbsoluteConstraints(324, 81, -1, -1));
+        Panel.add(P2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, -1, -1));
 
+        Todo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        Todo.setForeground(new java.awt.Color(255, 255, 255));
         Todo.setText("Todo");
         Todo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TodoActionPerformed(evt);
             }
         });
-        Panel.add(Todo, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 81, -1, -1));
+        Panel.add(Todo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
 
-        Generar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-vuelto-asignación-50.png"))); // NOI18N
+        Generar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-multiedición-50.png"))); // NOI18N
         Generar.setBorderPainted(false);
         Generar.setContentAreaFilled(false);
-        Generar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-vuelto-asignación-filled-50.png"))); // NOI18N
+        Generar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconoso/icons8-multiedición-filled-50.png"))); // NOI18N
         Generar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GenerarActionPerformed(evt);
             }
         });
-        Panel.add(Generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 60, -1, -1));
+        Panel.add(Generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 60, -1, -1));
 
-        LLenar.setColorArrow(new java.awt.Color(86, 0, 169));
-        LLenar.setColorBorde(new java.awt.Color(86, 0, 169));
-        LLenar.setColorFondo(new java.awt.Color(86, 0, 169));
+        LLenar.setColorArrow(new java.awt.Color(17, 111, 172));
+        LLenar.setColorBorde(new java.awt.Color(17, 111, 172));
+        LLenar.setColorFondo(new java.awt.Color(17, 111, 172));
         LLenar.setFocusCycleRoot(true);
+        LLenar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         LLenar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LLenarActionPerformed(evt);
@@ -292,8 +305,9 @@ DefaultTableModel modeloBusqueda = new DefaultTableModel() {
         Panel.add(LLenar, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 76, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Actualizar");
-        Panel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 510, -1, -1));
+        Panel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 480, -1, -1));
 
         getContentPane().add(Panel, java.awt.BorderLayout.CENTER);
 

@@ -32,11 +32,7 @@ public class Conexion {
     public Connection conexion() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-<<<<<<< HEAD
             cn = DriverManager.getConnection("jdbc:mysql://localhost/InventarioPEPS/UEPS?useSSL=false", "root", "1997");
-=======
-            cn = DriverManager.getConnection("jdbc:mysql://localhost/InventarioPEPS/UEPS?useSSL=false", "root", "InventarioPEPS");
->>>>>>> 56e5297ae2f47509dd6051b5c3b0cfc2293f79f7
       
         } catch (Exception e) {
             System.out.println(e.getMessage());

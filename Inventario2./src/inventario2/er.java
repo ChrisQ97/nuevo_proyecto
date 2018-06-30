@@ -204,26 +204,37 @@ Conexion con = new Conexion();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(189, 189, 189));
+        jPanel1.setBackground(new java.awt.Color(17, 111, 172));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("VENTA DE REPUESTOS SHALOM");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 790, -1));
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Balance de situación general al ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 230, -1));
+
+        ldia.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(ldia, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 30, 10));
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("de");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
+
+        mes.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 110, 20));
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("de");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, -1, -1));
+
+        anio.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(anio, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 60, 70, 10));
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("(Cifras en quetzales)");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 160, -1));
 

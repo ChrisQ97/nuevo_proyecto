@@ -283,32 +283,40 @@ public class resultados extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(189, 189, 189));
+        jPanel1.setBackground(new java.awt.Color(17, 111, 172));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("VENTA DE REPUESTOS SHALOM");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 20, 850, -1));
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Estado de resultados al");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
 
+        dia.setForeground(new java.awt.Color(255, 255, 255));
         dia.setText("jLabel3");
         jPanel1.add(dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, -1));
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("de");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, -1, -1));
 
+        mes.setForeground(new java.awt.Color(255, 255, 255));
         mes.setText("jLabel4");
         jPanel1.add(mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 130, -1));
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("de");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, -1, -1));
 
+        anio.setForeground(new java.awt.Color(255, 255, 255));
         anio.setText("jLabel5");
         jPanel1.add(anio, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, -1, -1));
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("(Cifras en quetzales)");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 180, -1));
 
