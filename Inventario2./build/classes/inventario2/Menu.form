@@ -164,9 +164,12 @@
               <Image iconType="3" name="/imagenes/rh37.png"/>
             </Property>
           </Properties>
+<<<<<<< HEAD
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonrhActionPerformed"/>
           </Events>
+=======
+>>>>>>> 56e5297ae2f47509dd6051b5c3b0cfc2293f79f7
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="490" y="80" width="90" height="70"/>
