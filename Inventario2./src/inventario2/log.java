@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +26,9 @@ Conexion con = new Conexion();
    
     Connection Consulta = con.conexion();
     boolean verificado;
+    
+    //
+    //Icon icono = new ImageIcon(getClass().getResource("ruta local"));
     /**
      * Creates new form log
      */
@@ -151,8 +156,11 @@ Conexion con = new Conexion();
             
         }
         else{
-            JOptionPane.showMessageDialog(null, "Datos incorrectos");
+           // JOptionPane.showMessageDialog(null, "Datos incorrectos");
             //System.out.println("no");
+            //JOptionPane.showMessageDialog(null," Aprendiendo a poner imagenes ", "Imagen Java", JOptionPane.PLAIN_MESSAGE, icono);
+            notificacion nt = new notificacion();
+            nt.setVisible(true);
         }
     }//GEN-LAST:event_ingresarActionPerformed
 
